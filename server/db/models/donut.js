@@ -16,7 +16,7 @@ const Donut = db.define('donut', {
     allowNull: false
   },
   qty: {
-    type: Sequelize.INT,
+    type: Sequelize.INTEGER,
     defaultValue: 0
   },
   imageUrl: {
