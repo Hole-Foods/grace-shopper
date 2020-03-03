@@ -3,6 +3,8 @@ const Review = require('./review')
 const Donut = require('./donut')
 const Order = require('./order')
 const Category = require('./category')
+const OrderItem = require('./orderItems')
+const CartItem = require('./cartItems')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -23,8 +25,11 @@ User.hasMany(Order)
 Donut.belongsTo(Category)
 Category.hasMany(Donut)
 
-Donut.belongsToMany(Order, {through: 'orderItems'})
-Order.belongsToMany(Donut, {through: 'orderItems'})
+Donut.belongsToMany(User, {through: CartItem})
+User.belongsToMany(Donut, {through: CartItem})
+
+Donut.belongsToMany(Order, {through: OrderItem})
+Order.belongsToMany(Donut, {through: OrderItem})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -37,5 +42,7 @@ module.exports = {
   Review,
   Donut,
   Order,
-  Category
+  Category,
+  OrderItem,
+  CartItem
 }
