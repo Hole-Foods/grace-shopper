@@ -12,7 +12,7 @@ const App = () => {
         <Navbar />
         <Routes />
         <br />
-        <AllDonuts />
+        {/* <AllDonuts /> */}
       </Content>
     </div>
   );
