@@ -9,3 +9,4 @@ export { Login, Signup } from './auth-form';
 
 export { default as Default } from './Default';
 export { default as AllDonuts } from './AllDonuts';
+export { default as SingleDonut } from './SingleDonut';

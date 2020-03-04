@@ -3,7 +3,7 @@ import axios from 'axios';
 /**
  * ACTION TYPES
  */
-const GET_DONUT = 'GET_DONUT';
+const SET_DONUT = 'SET_DONUT';
 
 /**
  * INITIAL STATE
@@ -13,7 +13,7 @@ const singleDonut = {};
 /**
  * ACTION CREATORS
  */
-const getDonut = donut => ({ type: GET_DONUT, donut });
+const setDonut = donut => ({ type: SET_DONUT, donut });
 
 /**
  * THUNK CREATORS
@@ -23,7 +23,9 @@ export const fetchSingleDonut = donutId => {
   return async dispatch => {
     try {
       const { data } = await axios.get(`/api/donuts/${donutId}`);
-      const action = getDonut(data);
+      const action = setDonut(data);
+      console.log('THUNK ACTION: ', action);
+      console.log('THUNK DATA: ', data);
       dispatch(action);
     } catch (err) {
       console.log(err);
@@ -36,7 +38,7 @@ export const fetchSingleDonut = donutId => {
  */
 export default function(state = singleDonut, action) {
   switch (action.type) {
-    case GET_DONUT:
+    case SET_DONUT:
       return action.donut;
     default:
       return state;
