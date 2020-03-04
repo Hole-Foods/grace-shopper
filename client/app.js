@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import GlobalStyle from './styles/Global';
-import { Navbar, Default } from './components';
+import { Navbar, AllDonuts } from './components';
 import Routes from './routes';
 
 const App = () => {
@@ -11,8 +11,6 @@ const App = () => {
       <Content>
         <Navbar />
         <Routes />
-        <br />
-        <Default />
       </Content>
     </div>
   );

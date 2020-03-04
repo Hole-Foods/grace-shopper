@@ -76,7 +76,7 @@ const donuts = [
       'https://i.pinimg.com/originals/9c/1d/4c/9c1d4c852bf8cb0ee75031e6bf6f0bb1.jpg',
   },
   {
-    name: 'glazed donut hole',
+    name: 'Glazed Donut Hole',
     categoryId: 2,
     price: 0,
     description:
@@ -84,6 +84,42 @@ const donuts = [
     qty: 0,
     imageUrl:
       'https://cdn.clipart.email/7d800599376471c2a09a2c46b42045f4_donut-hole-clipart_450-428.jpeg',
+  },
+  {
+    name: 'Snake Donut',
+    categoryId: 1,
+    price: 3.0,
+    description: 'Do not let this one get away!',
+    qty: 61,
+    imageUrl:
+      'https://preview.redd.it/5uzxdnns5pmz.jpg?width=1024&auto=webp&s=2678ac66064d4894734c987bf04e8174834e2ef6',
+  },
+  {
+    name: 'Sugar of Saturn',
+    categoryId: 1,
+    price: 9.5,
+    description: 'From up above.',
+    qty: 2,
+    imageUrl:
+      'https://res.cloudinary.com/teepublic/image/private/s--Pk-aS3Rt--/t_Preview/b_rgb:5e366e,c_limit,f_jpg,h_630,q_90,w_630/v1526754965/production/designs/2704131_0.jpg',
+  },
+  {
+    name: 'Cookie Monster',
+    categoryId: 1,
+    price: 3.5,
+    description: 'D is for donut that is good enough for me',
+    qty: 7,
+    imageUrl:
+      'https://previews.123rf.com/images/djvstock/djvstock1801/djvstock180113133/94572152-blue-donut-drawing-over-white-background-vector-illustration.jpg',
+  },
+  {
+    name: `Dante's Donut`,
+    categoryId: 1,
+    price: 1.5,
+    description: 'Represents the good in us all',
+    qty: 2,
+    imageUrl:
+      'https://friendlystock.com/wp-content/uploads/2019/07/17-winged-angel-donut-emoji-cartoon-clipart.jpg',
   },
 ];
 
