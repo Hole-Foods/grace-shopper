@@ -16,7 +16,6 @@ const SingleDonut = props => {
   }, []);
 
   if (!donut) {
-    console.log('RETURNING!');
     return;
   }
 

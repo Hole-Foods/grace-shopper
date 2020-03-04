@@ -4,9 +4,10 @@ import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import user from './user';
 import donuts from './donuts';
+import cart from './cart';
 import singleDonut from './donut';
 
-const reducer = combineReducers({ user, donuts, singleDonut });
+const reducer = combineReducers({ user, donuts, singleDonut, cart });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );

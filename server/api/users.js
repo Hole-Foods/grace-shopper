@@ -16,3 +16,27 @@ router.get('/', async (req, res, next) => {
     next(err);
   }
 });
+
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const users = await User.findByPk(req.params.userId, {
+      attributes: ['id', 'email'],
+      include: [Review], //future add past orders here
+    });
+    res.json(users);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/:userId/cart', async (req, res, next) => {
+  try {
+    const userCart = await CartItem.findAll({
+      where: { userId: req.params.userId },
+      include: [Donut],
+    });
+    res.json(userCart);
+  } catch (err) {
+    next(err);
+  }
+});

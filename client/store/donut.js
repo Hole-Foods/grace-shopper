@@ -24,8 +24,6 @@ export const fetchSingleDonut = donutId => {
     try {
       const { data } = await axios.get(`/api/donuts/${donutId}`);
       const action = setDonut(data);
-      console.log('THUNK ACTION: ', action);
-      console.log('THUNK DATA: ', data);
       dispatch(action);
     } catch (err) {
       console.log(err);
