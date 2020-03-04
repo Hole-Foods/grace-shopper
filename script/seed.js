@@ -1,19 +1,68 @@
 'use strict'
-
+const Op = require('sequelize')
 const db = require('../server/db')
-const {User, Category} = require('../server/db/models')
+const {
+  User,
+  Review,
+  Donut,
+  Category,
+  CartItem,
+  Order
+} = require('../server/db/models')
+const {users, donuts, reviews, cItems} = require('./data')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  // USERS
+  const seedUsers = await Promise.all(users.map(usr => User.create(usr)))
+  console.log(`${seedUsers.length} users seeded!`)
 
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded successfully`)
+  // CATEGORIES
+  await Category.create({name: 'ring'})
+  console.log(`ring category created!`)
+  await Category.create({name: 'hole'})
+  console.log(`hole category created!`)
+  await Category.create({name: 'bar'})
+  console.log(`bar category created!`)
+
+  // DONUTS
+  const seedDonuts = await Promise.all(
+    donuts.map(async donut => {
+      const newDonut = await Donut.create(donut)
+      const category = await Category.findOne({
+        where: {id: donut.categoryId}
+      })
+      await category.addDonut(newDonut)
+    })
+  )
+  console.log(`${seedDonuts.length} donuts seeded!`)
+
+  // REVIEWS
+  const seedReviews = await Promise.all(
+    reviews.map(async review => {
+      const newReview = await Review.create(review)
+      const donut = await Donut.findOne({
+        where: {id: review.donutId}
+      })
+      // await newReview.setReview(donut)
+      await donut.addReview(newReview)
+    })
+  )
+  console.log(`${seedReviews.length} reviews seeded!`)
+
+  // CART
+  const seedCart = await Promise.all(cItems.map(item => CartItem.create(item)))
+  console.log(`${seedCart.length} items seeded!`)
+
+  // const users = await Promise.all([
+  //   User.create({email: 'cody@email.com', password: '123'}),
+  //   User.create({email: 'murphy@email.com', password: '123'})
+  // ])
+
+  // console.log(`seeded ${users.length} users`)
+  // console.log(`seeded successfully`)
 }
 
 // We've separated the `seed` function from the `runSeed` function.

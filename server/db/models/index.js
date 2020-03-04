@@ -25,11 +25,17 @@ User.hasMany(Order)
 Donut.belongsTo(Category)
 Category.hasMany(Donut)
 
-Donut.belongsToMany(User, {through: CartItem})
-User.belongsToMany(Donut, {through: CartItem})
+CartItem.belongsTo(Donut)
+Donut.hasMany(CartItem)
 
-Donut.belongsToMany(Order, {through: OrderItem})
-Order.belongsToMany(Donut, {through: OrderItem})
+CartItem.belongsTo(User)
+User.hasMany(CartItem)
+
+// Donut.belongsToMany(User, {through: CartItem})
+// User.belongsToMany(Donut, {through: CartItem})
+
+// Donut.belongsToMany(Order, {through: OrderItem})
+// Order.belongsToMany(Donut, {through: OrderItem})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -43,6 +49,6 @@ module.exports = {
   Donut,
   Order,
   Category,
-  OrderItem,
-  CartItem
+  CartItem,
+  OrderItem
 }
