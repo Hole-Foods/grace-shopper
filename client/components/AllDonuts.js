@@ -22,7 +22,6 @@ const AllDonuts = props => {
 const mapStateToProps = state => {
   return {
     donuts: state.donuts,
-    donut: state.donut,
   };
 };
 
