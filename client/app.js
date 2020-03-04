@@ -12,7 +12,6 @@ const App = () => {
         <Navbar />
         <Routes />
         <br />
-        <AllDonuts />
       </Content>
     </div>
   );
