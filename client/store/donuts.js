@@ -16,7 +16,6 @@ export const fetchDonuts = () => {
   return async dispatch => {
     try {
       const { data } = await axios.get('/api/donuts');
-      console.log('DONUTS DATA', data);
       dispatch(setDonuts(data));
     } catch (err) {
       console.log('fetchDonuts error', err);
