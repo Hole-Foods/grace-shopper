@@ -28,9 +28,9 @@ const AllDonuts = () => {
                   <div className="card-body">
                     <h5 className="card-title">{donut.name}</h5>
                     <p className="card-text">${donut.price}</p>
-                    <a href="#" className="btn btn-primary">
+                    <button href="#" className="btn btn-primary">
                       Add to cart
-                    </a>
+                    </button>
                   </div>
                 </Link>
               </div>
