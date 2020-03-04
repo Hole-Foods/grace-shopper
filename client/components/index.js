@@ -8,3 +8,4 @@ export { default as UserHome } from './user-home';
 export { Login, Signup } from './auth-form';
 
 export { default as Default } from './Default';
+export { default as AllDonuts } from './AllDonuts';
