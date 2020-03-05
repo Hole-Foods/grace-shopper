@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'; // don't forget to import useEffect
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'; // import redux hooks
 import { fetchDonuts } from '../store/donuts';
+import { addItemToCart } from '../store/cart';
 import styled from 'styled-components';
 
 const AllDonuts = () => {
@@ -16,6 +17,10 @@ const AllDonuts = () => {
     dispatch(fetchDonuts());
   }, []);
 
+  const addToCart = donutId => {
+    dispatch(addItemToCart({ donutId, qty: 1 }));
+  };
+
   return (
     <div className="container">
       <div className="row">
@@ -25,14 +30,17 @@ const AllDonuts = () => {
               <div className="card">
                 <Link to={`/donuts/${donut.id}`}>
                   <img src={donut.imageUrl} className="card-img-top" />
-                  <div className="card-body">
-                    <h5 className="card-title">{donut.name}</h5>
-                    <p className="card-text">${donut.price}</p>
-                    <button href="#" className="btn btn-primary">
-                      Add to cart
-                    </button>
-                  </div>
                 </Link>
+                <div className="card-body">
+                  <h5 className="card-title">{donut.name}</h5>
+                  <p className="card-text">${donut.price}</p>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => addToCart(donut.id)}
+                  >
+                    Add to cart
+                  </button>
+                </div>
               </div>
             </div>
           </DefaultDiv>
