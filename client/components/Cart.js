@@ -13,8 +13,7 @@ const Cart = () => {
     };
   });
   useEffect(() => {
-    //dispatch(fetchCart(user.id))
-    dispatch(fetchCart(1));
+    dispatch(fetchCart(user.id));
   }, []);
   return (
     <>
