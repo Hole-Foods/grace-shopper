@@ -54,9 +54,8 @@ router.put('/', async (req, res, next) => {
       if (!req.session.cart) {
         req.session.cart = [];
       }
-      const guestCart = req.session.cart;
       let update = false;
-      const updatedCart = guestCart.map(el => {
+      const updatedCart = req.session.cart.map(el => {
         if (el.donutId === req.body.donutId) {
           el.qty += req.body.qty;
           update = true;
