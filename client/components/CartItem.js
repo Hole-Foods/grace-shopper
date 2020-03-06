@@ -9,7 +9,11 @@ const CartItem = props => {
         <div className="row">
           <div className="col">{item.donut.name}</div>
           <div className="col">${item.donut.price}</div>
-          <div className="col">{item.qty}</div>
+          <div className="col">
+            <button className="btn">-</button>
+            {item.qty}
+            <button className="btn">+</button>
+          </div>
           <div className="col">${item.donut.price * item.qty}</div>
         </div>
       </DefaultDiv>

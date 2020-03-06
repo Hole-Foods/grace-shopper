@@ -17,12 +17,16 @@ const SingleDonut = props => {
 
   const [qty, setQty] = useState(1);
 
-  const addToCart = donutId => {
-    dispatch(addItemToCart({ donutId, qty }));
+  const addToCart = evt => {
+    setQty(evt.target.qty.value);
+    console.log(qty);
+    if (qty > 0 && qty <= donut.qty) {
+      dispatch(addItemToCart({ donutId: donut.id, qty }));
+    }
   };
 
   if (!donut) {
-    return;
+    return <div>4🍩4 no donut found</div>;
   }
 
   return (
@@ -32,15 +36,16 @@ const SingleDonut = props => {
           <h1>{donut.name}</h1>
           <img src={donut.imageUrl} />
           <p>{donut.description}</p>
-          <button className="btn btn-primary">-</button>
-          <input type="number" min="1" max={donut.qty} />
-          <button className="btn btn-primary">+</button>
-          <button
-            className="btn btn-primary"
-            onClick={() => addToCart(donut.id)}
-          >
-            Add to cart
-          </button>
+          <form>
+            <input name="qty" type="number" min="1" max={donut.qty} />
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={addToCart}
+            >
+              Add to cart
+            </button>
+          </form>
           <h2>Donut Reviews</h2>
           {donut.reviews
             ? donut.reviews.map(review => (
