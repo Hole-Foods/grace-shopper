@@ -80,10 +80,13 @@ const seed = async () => {
     );
 
     await Promise.all(users.map(user => user.save()));
-
+    console.log(`${users.length} users seeded!`);
     await Promise.all(categories.map(category => category.save()));
+    console.log(`${categories.length} categories seeded!`);
     await Promise.all(donuts.map(donut => donut.save()));
+    console.log(`${donuts.length} donuts seeded!`);
     await Promise.all(reviews.map(review => review.save()));
+    console.log(`${reviews.length} reviews seeded!`);
   } catch (err) {
     console.log(err);
   }
