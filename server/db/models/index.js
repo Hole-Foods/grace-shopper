@@ -1,10 +1,10 @@
-const User = require('./user')
-const Review = require('./review')
-const Donut = require('./donut')
-const Order = require('./order')
-const Category = require('./category')
-const OrderItem = require('./orderItems')
-const CartItem = require('./cartItems')
+const User = require('./user');
+const Review = require('./review');
+const Donut = require('./donut');
+const Order = require('./order');
+const Category = require('./category');
+const OrderItem = require('./orderItems');
+const CartItem = require('./cartItems');
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -13,23 +13,32 @@ const CartItem = require('./cartItems')
  *    BlogPost.belongsTo(User)
  */
 
-Review.belongsTo(User)
-User.hasMany(Review)
+Review.belongsTo(User);
+User.hasMany(Review);
 
-Review.belongsTo(Donut)
-Donut.hasMany(Review)
+Review.belongsTo(Donut);
+Donut.hasMany(Review);
 
-Order.belongsTo(User)
-User.hasMany(Order)
+Order.belongsTo(User);
+User.hasMany(Order);
 
-Donut.belongsTo(Category)
-Category.hasMany(Donut)
+Donut.belongsTo(Category);
+Category.hasMany(Donut);
 
-CartItem.belongsTo(Donut)
-Donut.hasMany(CartItem)
+CartItem.belongsTo(Donut);
+Donut.hasMany(CartItem);
 
-CartItem.belongsTo(User)
-User.hasMany(CartItem)
+CartItem.belongsTo(User);
+User.hasMany(CartItem);
+
+OrderItem.belongsTo(Order);
+Order.hasMany(OrderItem);
+
+OrderItem.belongsTo(Donut);
+Donut.hasMany(OrderItem);
+
+User.hasMany(Order);
+Order.belongsTo(User);
 
 // Donut.belongsToMany(User, {through: CartItem})
 // User.belongsToMany(Donut, {through: CartItem})
@@ -50,5 +59,5 @@ module.exports = {
   Order,
   Category,
   CartItem,
-  OrderItem
-}
+  OrderItem,
+};
