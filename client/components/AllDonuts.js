@@ -21,7 +21,7 @@ const AllDonuts = () => {
       <div className="row">
         {donuts.map(donut => (
           <DefaultDiv key={donut.id}>
-            <div className="col">
+            <div className="col-md">
               <div className="card">
                 <Link to={`/donuts/${donut.id}`}>
                   <img src={donut.imageUrl} className="card-img-top" />
