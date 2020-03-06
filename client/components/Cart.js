@@ -16,6 +16,11 @@ const Cart = () => {
     //dispatch(fetchCart(user.id))
     dispatch(fetchCart(1));
   }, []);
+
+  if (cart.length === 0) {
+    return <div>No donuts in cart</div>;
+  }
+
   return (
     <>
       <DefaultDiv>

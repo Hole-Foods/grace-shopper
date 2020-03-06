@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleDonut } from '../store/donut';
+import { addItemToCart } from '../store/cart';
 
 const SingleDonut = props => {
   // declare dispatch function - always when you need dispatch
@@ -15,13 +16,18 @@ const SingleDonut = props => {
     dispatch(fetchSingleDonut(props.match.params.donutId));
   }, []);
 
-  const [qty, setQty] = useState(1);
-
   const addToCart = evt => {
-    setQty(evt.target.qty.value);
-    console.log(qty);
+    evt.preventDefault();
+    console.log('DONUTID: ', props.match.params.donutId);
+    const qty = parseInt(evt.target.qty.value);
+    console.log('QTY: ', qty);
     if (qty > 0 && qty <= donut.qty) {
-      dispatch(addItemToCart({ donutId: donut.id, qty }));
+      dispatch(
+        addItemToCart({
+          donutId: props.match.params.donutId,
+          qty: qty,
+        })
+      );
     }
   };
 
@@ -36,13 +42,9 @@ const SingleDonut = props => {
           <h1>{donut.name}</h1>
           <img src={donut.imageUrl} />
           <p>{donut.description}</p>
-          <form>
+          <form id="add-to-cart" onSubmit={addToCart}>
             <input name="qty" type="number" min="1" max={donut.qty} />
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={addToCart}
-            >
+            <button type="submit" className="btn btn-primary">
               Add to cart
             </button>
           </form>
