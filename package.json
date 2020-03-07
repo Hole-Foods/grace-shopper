@@ -42,6 +42,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.0",
+    "chance": "^1.1.4",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^6.0.0",
     "express": "^4.16.4",
@@ -84,7 +85,6 @@
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "chai": "^4.2.0",
-    "chance": "^1.1.4",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "eslint": "^5.16.0",
