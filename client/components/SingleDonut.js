@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleDonut } from '../store/donut';
+import { addItemToCart } from '../store/cart';
 
 const SingleDonut = props => {
   // declare dispatch function - always when you need dispatch
@@ -15,8 +16,21 @@ const SingleDonut = props => {
     dispatch(fetchSingleDonut(props.match.params.donutId));
   }, []);
 
+  const addToCart = evt => {
+    evt.preventDefault();
+    const qty = parseInt(evt.target.qty.value);
+    if (qty > 0 && qty <= donut.qty) {
+      dispatch(
+        addItemToCart({
+          donutId: props.match.params.donutId,
+          qty,
+        })
+      );
+    }
+  };
+
   if (!donut) {
-    return;
+    return <div>4🍩4 no donut found</div>;
   }
 
   return (
@@ -26,6 +40,12 @@ const SingleDonut = props => {
           <h1>{donut.name}</h1>
           <img src={donut.imageUrl} />
           <p>{donut.description}</p>
+          <form id="add-to-cart" onSubmit={addToCart}>
+            <input name="qty" type="number" min="1" max={donut.qty} />
+            <button type="submit" className="btn btn-primary">
+              Add to cart
+            </button>
+          </form>
           <h2>Donut Reviews</h2>
           {donut.reviews
             ? donut.reviews.map(review => (

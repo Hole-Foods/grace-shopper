@@ -1,27 +1,54 @@
 import axios from 'axios';
 
 const GET_CART = 'GET_CART';
+const ADD_TO_CART = 'ADD_TO_CART';
 
 const getCart = cart => ({
   type: GET_CART,
   cart,
 });
+const addToCart = cartItem => ({
+  type: ADD_TO_CART,
+  cartItem,
+});
 
-export const fetchCart = userId => async dispatch => {
+export const fetchCart = () => async dispatch => {
   try {
-    const response = await axios.get(`/api/users/${userId}/cart`);
+    const response = await axios.get(`/api/cart/`);
     dispatch(getCart(response.data));
   } catch (err) {
     console.log('fetchCart thunk error: ', err);
   }
 };
 
-const defaultCart = [];
+export const addItemToCart = donut => async dispatch => {
+  try {
+    const response = await axios.put(`/api/cart/`, donut);
+    dispatch(addToCart(response.data));
+  } catch (err) {
+    console.log('addItemToCart thunk error: ', err);
+  }
+};
 
-export default function(state = defaultCart, action) {
+const initCart = [];
+
+export default function(state = initCart, action) {
   switch (action.type) {
     case GET_CART:
       return action.cart;
+    case ADD_TO_CART:
+      let cart = [...state];
+      let inCart = false;
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].donutId === action.cartItem.donutId) {
+          inCart = true;
+          cart[i] = action.cartItem;
+        }
+      }
+      if (!inCart) {
+        cart.push(action.cartItem);
+      }
+      return cart;
     default:
       return state;
   }
