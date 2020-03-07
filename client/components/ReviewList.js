@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchSingleDonut } from '../store/donut';
+//import { useDispatch, useSelector } from 'react-redux';
+//import { fetchSingleDonut } from '../store/donut';
 
 import styled from 'styled-components';
 
 const ReviewList = props => {
   console.log('REVIEW LIST PROPS', props);
   // const dispatch = useDispatch();
-  const { reviews } = props;
+  if (!props.reviews || !props.reviews.length)
+    return <div>No reviews for this donut</div>;
+  //const { reviews } = props;
 
   // // just like map state to props but assigning to a const variable
   // const reviews = useSelector(state => state.singleDonut.reviews);
@@ -18,8 +20,6 @@ const ReviewList = props => {
   // }, []);
 
   // console.log('REVIEWLIST REVIEWS', reviews);
-
-  if (!props.reviews) return <div>404</div>;
 
   const review = props.reviews[0];
   return (

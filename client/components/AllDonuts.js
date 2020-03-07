@@ -32,7 +32,9 @@ const AllDonuts = () => {
                   <img src={donut.imageUrl} className="card-img-top" />
                 </Link>
                 <div className="card-body">
-                  <h5 className="card-title">{donut.name}</h5>
+                  <Link to={`/donuts/${donut.id}`}>
+                    <h5 className="card-title">{donut.name}</h5>
+                  </Link>
                   <p className="card-text">${donut.price}</p>
                   <button
                     type="submit"

@@ -13,9 +13,13 @@ const Cart = () => {
     };
   });
   useEffect(() => {
-    //dispatch(fetchCart(user.id))
-    dispatch(fetchCart(1));
+    dispatch(fetchCart(user.id));
   }, []);
+
+  if (cart.length === 0) {
+    return <div>N🍩 donuts in cart</div>;
+  }
+
   return (
     <>
       <DefaultDiv>
@@ -27,8 +31,8 @@ const Cart = () => {
             <div className="col">Quantity</div>
             <div className="col">Price</div>
           </div>
-          {cart.map(item => (
-            <CartItem key={item.id} item={item} />
+          {cart.map((item, index) => (
+            <CartItem key={index} item={item} />
           ))}
           <div className="row">
             <div className="col" />
