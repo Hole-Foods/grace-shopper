@@ -35,7 +35,7 @@ router.put('/', async (req, res, next) => {
       });
       const cartItem = cartItemArr[0];
       const newQty = req.body.qty + cartItem.qty;
-      cartItem.update({ qty: newQty });
+      await cartItem.update({ qty: newQty });
       const withDonut = await CartItem.findByPk(cartItem.id, {
         include: Donut,
       });

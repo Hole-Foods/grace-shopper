@@ -37,16 +37,18 @@ export default function(state = initCart, action) {
     case GET_CART:
       return action.cart;
     case ADD_TO_CART:
-      if (state.includes(action.cartItem)) {
-        const newState = state.map(cartItem => {
-          if (cartItem === action.cartItem) {
-            cartItem.qty = cartItem.qty + action.cartItem.qty;
-          }
-        });
-        return newState;
-      } else {
-        return [...state, action.cartItem];
+      let cart = [...state];
+      let inCart = false;
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].donutId === action.cartItem.donutId) {
+          inCart = true;
+          cart[i] = action.cartItem;
+        }
       }
+      if (!inCart) {
+        cart.push(action.cartItem);
+      }
+      return cart;
     default:
       return state;
   }

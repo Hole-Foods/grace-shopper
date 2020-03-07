@@ -15,6 +15,11 @@ const Cart = () => {
   useEffect(() => {
     dispatch(fetchCart(user.id));
   }, []);
+
+  if (cart.length === 0) {
+    return <div>N🍩 donuts in cart</div>;
+  }
+
   return (
     <>
       <DefaultDiv>
