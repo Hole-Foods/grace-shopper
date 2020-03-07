@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../store/cart';
 
+export const dollaDollaBillzYall = total => {
+  const decimalized = parseFloat(total).toFixed(2);
+  return decimalized;
+};
+
 const CartItem = props => {
   if (!props.item) {
     return <div>4🍩4 no donut found</div>;
@@ -16,7 +21,9 @@ const CartItem = props => {
   };
 
   const subtractFromCart = () => {
-    dispatch(addItemToCart({ donutId: item.donutId, qty: -1 }));
+    if (item.qty > 0) {
+      dispatch(addItemToCart({ donutId: item.donutId, qty: -1 }));
+    }
   };
 
   return (
@@ -34,7 +41,9 @@ const CartItem = props => {
               +
             </button>
           </div>
-          <div className="col">${item.donut.price * item.qty}</div>
+          <div className="col">
+            ${dollaDollaBillzYall(item.donut.price * item.qty)}
+          </div>
         </div>
       </DefaultDiv>
     </>

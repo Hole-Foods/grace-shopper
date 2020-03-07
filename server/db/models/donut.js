@@ -12,7 +12,7 @@ const Donut = db.define('donut', {
     defaultValue: "It's a donut. What more do you need to know?",
   },
   price: {
-    type: Sequelize.FLOAT(4, 2),
+    type: Sequelize.DECIMAL(10, 2),
     allowNull: false,
   },
   qty: {

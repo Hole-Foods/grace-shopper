@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'; // don't forget to import useEffect
 import { useDispatch, useSelector } from 'react-redux'; // import redux hooks
 import { fetchCart } from '../store/cart';
 import styled from 'styled-components';
-import CartItem from './CartItem';
+import CartItem, { dollaDollaBillzYall } from './CartItem';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -40,9 +40,11 @@ const Cart = () => {
             <div className="col">Total</div>
             <div className="col">
               $
-              {cart.reduce((acc, item) => {
-                return acc + item.donut.price * item.qty;
-              }, 0)}
+              {dollaDollaBillzYall(
+                cart.reduce((acc, item) => {
+                  return acc + item.donut.price * item.qty;
+                }, 0)
+              )}
             </div>
           </div>
         </div>
