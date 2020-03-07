@@ -13,12 +13,11 @@ const Cart = () => {
     };
   });
   useEffect(() => {
-    //dispatch(fetchCart(user.id))
-    dispatch(fetchCart(1));
+    dispatch(fetchCart(user.id));
   }, []);
 
   if (cart.length === 0) {
-    return <div>No donuts in cart</div>;
+    return <div>N🍩 donuts in cart</div>;
   }
 
   return (

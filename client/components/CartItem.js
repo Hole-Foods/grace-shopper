@@ -1,38 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchSingleDonut } from '../store/donut';
+import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../store/cart';
 
 const CartItem = props => {
+  if (!props.item) {
+    return <div>4🍩4 no donut found</div>;
+  }
   const { item } = props;
-  // console.log('ITEM: ', item);
 
-  // // declare dispatch function - always when you need dispatch
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const [qty, setQty] = useState(item.qty);
+  const addToCart = () => {
+    dispatch(addItemToCart({ donutId: item.donutId, qty: 1 }));
+  };
 
-  // const addToCart = () => {
-  //   setQty(qty + 1);
-  //   dispatch(addItemToCart({ donutId: item.donut.id, qty: 1 }));
-  // };
-
-  // const subtractFromCart = evt => {
-  //   evt.preventDefault();
-  //   const qty = parseInt(evt.target.qty.value);
-  //   if (qty > 0 && qty <= donut.qty) {
-  //     dispatch(
-  //       addItemToCart({
-  //         donutId: props.match.params.donutId,
-  //         qty: qty,
-  //       })
-  //     );
-  //   }
-  // };
-
-  //Subtract from cart will require a thunk
-  //Must make sure user cannot go below 0 and charge us for donuts
+  const subtractFromCart = () => {
+    dispatch(addItemToCart({ donutId: item.donutId, qty: -1 }));
+  };
 
   return (
     <>
@@ -41,9 +26,13 @@ const CartItem = props => {
           <div className="col">{item.donut.name}</div>
           <div className="col">${item.donut.price}</div>
           <div className="col">
-            <button className="btn">-</button>
+            <button className="btn" onClick={subtractFromCart}>
+              -
+            </button>
             {item.qty}
-            <button className="btn">+</button>
+            <button className="btn" onClick={addToCart}>
+              +
+            </button>
           </div>
           <div className="col">${item.donut.price * item.qty}</div>
         </div>

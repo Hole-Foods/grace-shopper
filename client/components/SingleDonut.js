@@ -18,14 +18,12 @@ const SingleDonut = props => {
 
   const addToCart = evt => {
     evt.preventDefault();
-    console.log('DONUTID: ', props.match.params.donutId);
     const qty = parseInt(evt.target.qty.value);
-    console.log('QTY: ', qty);
     if (qty > 0 && qty <= donut.qty) {
       dispatch(
         addItemToCart({
           donutId: props.match.params.donutId,
-          qty: qty,
+          qty,
         })
       );
     }

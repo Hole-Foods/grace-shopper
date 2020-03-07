@@ -35,7 +35,7 @@ router.put('/', async (req, res, next) => {
       });
       const cartItem = cartItemArr[0];
       const newQty = req.body.qty + cartItem.qty;
-      cartItem.update({ qty: newQty });
+      await cartItem.update({ qty: newQty });
       const withDonut = await CartItem.findByPk(cartItem.id, {
         include: Donut,
       });
@@ -60,6 +60,24 @@ router.put('/', async (req, res, next) => {
       req.session.cart = updatedCart;
       res.json(addDonut);
     }
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete('/', async (req, res, next) => {
+  try {
+    if (req.user) {
+      await CartItem.destroy({
+        where: { userId: req.user.id, donutId: req.body.donutId },
+      });
+    } else {
+      const guestCart = req.session.cart.filter(
+        cartItem => cartItem.donutId !== req.body.donutId
+      );
+      req.session.cart = guestCart;
+    }
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }
