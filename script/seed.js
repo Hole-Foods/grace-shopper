@@ -12,7 +12,7 @@ const {
 const NUM_USERS = 5;
 const NUM_CATEGORIES = 5;
 const NUM_DONUTS = 100;
-const NUM_REVIEWS = 100;
+const NUM_REVIEWS = 10;
 const NUM_CART_ITEMS = 5; // FOR USER EMAIL@EMAIL.COM
 
 const emails = chance.unique(chance.email, NUM_USERS);
@@ -56,7 +56,7 @@ const randomDonut = () => {
     name: randomName(),
     description: chance.paragraph({ sentences: 10 }),
     price: chance.floating({ min: 0, max: 100, fixed: 2 }),
-    qty: 100,
+    qty: `${NUM_DONUTS}`,
     categoryId: chance.integer({ min: 1, max: `${NUM_CATEGORIES}` }),
   });
 };
@@ -74,7 +74,7 @@ const randomReview = () => {
 const randomCartItem = () => {
   return CartItem.build({
     qty: chance.integer({ min: 1, max: 5 }),
-    userId: 6,
+    userId: 1,
     donutId: chance.integer({ min: 1, max: `${NUM_DONUTS}` }),
   });
 };
@@ -89,12 +89,10 @@ const seed = async () => {
   try {
     await db.sync({ force: true });
 
-    users.push(
-      User.build({
-        email: 'email@email.com',
-        password: '123',
-      })
-    );
+    await User.create({
+      email: 'email@email.com',
+      password: '123',
+    });
 
     await Promise.all(users.map(user => user.save()));
     console.log(`${users.length} users seeded!`);
