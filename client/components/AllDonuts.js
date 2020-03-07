@@ -35,6 +35,7 @@ const AllDonuts = () => {
                   <h5 className="card-title">{donut.name}</h5>
                   <p className="card-text">${donut.price}</p>
                   <button
+                    type="submit"
                     className="btn btn-primary"
                     onClick={() => addToCart(donut.id)}
                   >

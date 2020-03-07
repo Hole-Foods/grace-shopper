@@ -12,7 +12,7 @@ const guestCartItem = (donutId, qty) => {
 router.get('/', async (req, res, next) => {
   try {
     if (req.user) {
-      console.log('REQ.USER !!!!!!!!!!!!!!!!! :', req.user);
+      // console.log('REQ.USER !!!!!!!!!!!!!!!!! :', req.user);
       const userCart = await CartItem.findAll({
         where: { userId: req.user.id },
         include: [Donut],
@@ -25,7 +25,7 @@ router.get('/', async (req, res, next) => {
       const guestCart = req.session.cart;
       await Promise.all(
         guestCart.map(async item => {
-          console.log('ITEM INSIDE MAP', item);
+          // console.log('ITEM INSIDE MAP', item);
           item.donut = await Donut.findByPk(item.donutId);
         })
       );
