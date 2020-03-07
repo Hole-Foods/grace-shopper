@@ -1,5 +1,12 @@
 const router = require('express').Router();
-const { User, CartItem, Order, OrderItem, Donut } = require('../db/models');
+const {
+  User,
+  Address,
+  CartItem,
+  Order,
+  OrderItem,
+  Donut,
+} = require('../db/models');
 const { isLoggedIn } = require('../utils');
 module.exports = router;
 
@@ -17,7 +24,24 @@ const adjustStock = async (id, qty) => {
 
 router.put('/', isLoggedIn, async (req, res, next) => {
   // FORM INFO ON REQ.BODY -> TODO: CREATE ADDRESS TABLE
+  console.log('********************REQ DOT BODY', req.body);
+  console.log(req.user.id);
   try {
+    const [address, wasCreated] = await Address.findOrCreate({
+      where: { address1: req.body.address1, address2: req.body.address2 },
+      defaults: {
+        address2: req.body.address2,
+        city: req.body.city,
+        state: req.body.state,
+        zip: req.body.zip,
+        country: req.body.country,
+      },
+    });
+
+    const addressId = address.id;
+
+    console.log('********************* address', address);
+
     const user = await User.findByPk(req.user.id);
     //console.log(Object.keys(user.__proto__));
     const cartItems = await user.getCartItems({
@@ -42,6 +66,7 @@ router.put('/', isLoggedIn, async (req, res, next) => {
 
     const order = await Order.create();
     await order.setUser(user);
+    await order.setAddress(address);
 
     //console.log(Object.keys(order.__proto__));
 
@@ -58,7 +83,7 @@ router.put('/', isLoggedIn, async (req, res, next) => {
 
     await order.setOrderItems(orderItems); // take in an array of order items
 
-    await CartItem.destroy({ where: { userId: user.id } }); // finally destroy cart items
+    //await CartItem.destroy({ where: { userId: user.id } }); // finally destroy cart items
 
     res.json(order);
   } catch (err) {

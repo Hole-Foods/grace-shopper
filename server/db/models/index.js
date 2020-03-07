@@ -2,6 +2,7 @@ const User = require('./user');
 const Review = require('./review');
 const Donut = require('./donut');
 const Order = require('./order');
+const Address = require('./address');
 const Category = require('./category');
 const OrderItem = require('./orderItems');
 const CartItem = require('./cartItems');
@@ -40,11 +41,8 @@ Donut.hasMany(OrderItem);
 User.hasMany(Order);
 Order.belongsTo(User);
 
-// Donut.belongsToMany(User, {through: CartItem})
-// User.belongsToMany(Donut, {through: CartItem})
-
-// Donut.belongsToMany(Order, {through: OrderItem})
-// Order.belongsToMany(Donut, {through: OrderItem})
+Order.belongsTo(Address);
+User.belongsTo(Address);
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -57,6 +55,7 @@ module.exports = {
   Review,
   Donut,
   Order,
+  Address,
   Category,
   CartItem,
   OrderItem,
