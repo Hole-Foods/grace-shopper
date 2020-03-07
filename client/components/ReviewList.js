@@ -27,14 +27,27 @@ const ReviewList = props => {
       <DefaultDiv>
         <h2>Reviews</h2>
         <div key={review.id}>
-          <h3>Review</h3>
           <h4>Stars: {review.rating}</h4>
           <p>{review.content}</p>
         </div>
       </DefaultDiv>
     </>
-    // <div>
-    //   <div>mmmm donuts</div>
+
+    //   <div className="container">
+    //   <div className="row">
+    //     {reviews.map(review => (
+    //       <DefaultDiv key={review.id}>
+    //         <div className="col-md">
+    //           <div className="card">
+    //             <div className="card-body">
+    //               <h3 className="card-title">Stars: {review.rating}</h3>
+    //               <p className="card-text">{review.content}</p>
+    //             </div>
+    //           </div>
+    //         </div>
+    //       </DefaultDiv>
+    //     ))}
+    //   </div>
     // </div>
   );
 };
