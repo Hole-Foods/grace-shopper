@@ -27,6 +27,7 @@ const SingleDonut = props => {
         })
       );
     }
+    props.history.push('/cart');
   };
 
   if (!donut) {

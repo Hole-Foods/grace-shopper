@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../store/cart';
+import { Link } from 'react-router-dom';
 
 const CartItem = props => {
   if (!props.item) {
@@ -23,7 +24,9 @@ const CartItem = props => {
     <>
       <DefaultDiv>
         <div className="row">
-          <div className="col">{item.donut.name}</div>
+          <div className="col">
+            <Link to={`/donuts/${item.donutId}`}>{item.donut.name}</Link>
+          </div>
           <div className="col">${item.donut.price}</div>
           <div className="col">
             <button className="btn" onClick={subtractFromCart}>
