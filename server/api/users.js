@@ -28,15 +28,3 @@ router.get('/:userId', async (req, res, next) => {
     next(err);
   }
 });
-
-router.get('/:userId/cart', async (req, res, next) => {
-  try {
-    const userCart = await CartItem.findAll({
-      where: { userId: req.params.userId },
-      include: [Donut],
-    });
-    res.json(userCart);
-  } catch (err) {
-    next(err);
-  }
-});
