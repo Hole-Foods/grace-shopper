@@ -15,9 +15,8 @@ const adjustStock = async (id, qty) => {
   await donut.save();
 };
 
-router.get('/', isLoggedIn, async (req, res, next) => {
-  // SET TO GET FOR TESTING
-  // REQ.BODY WILL HAVE FORM INFO SO CHANGE TO POST
+router.put('/', isLoggedIn, async (req, res, next) => {
+  // FORM INFO ON REQ.BODY -> TODO: CREATE ADDRESS TABLE
   try {
     const user = await User.findByPk(req.user.id);
     //console.log(Object.keys(user.__proto__));
