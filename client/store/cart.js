@@ -30,6 +30,15 @@ export const addItemToCart = donut => async dispatch => {
   }
 };
 
+export const deleteItemFromCart = donutId => async dispatch => {
+  try {
+    await axios.delete(`/api/cart/${donutId}`);
+    dispatch(fetchCart());
+  } catch (err) {
+    console.log('deleteItemFromCart thunk error: ', err);
+  }
+};
+
 const initCart = [];
 
 export default function(state = initCart, action) {

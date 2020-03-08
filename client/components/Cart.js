@@ -7,12 +7,14 @@ import FadeIn from 'react-fade-in';
 
 const Cart = () => {
   const dispatch = useDispatch();
+
   const { cart, user } = useSelector(state => {
     return {
       cart: state.cart,
       user: state.user,
     };
   });
+
   useEffect(() => {
     dispatch(fetchCart(user.id));
   }, []);
@@ -20,7 +22,7 @@ const Cart = () => {
   if (cart.length === 0) {
     return <div>N🍩 donuts in cart</div>;
   }
-  console.log('CART', cart);
+
   return (
     <>
       <FadeIn transitionDuration="1000">
