@@ -12,4 +12,5 @@ export { default as AllDonuts } from './AllDonuts';
 export { default as Cart } from './Cart';
 export { default as SingleDonut } from './SingleDonut';
 
-export { default as BillShip } from './BillShip';
+export { default as OrderCheckout } from './OrderCheckout';
+export { default as OrderConfirmation } from './OrderConfirmation';

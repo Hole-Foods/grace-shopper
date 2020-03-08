@@ -5,19 +5,26 @@ import history from '../history';
  * ACTION TYPES
  */
 
+const ORDER_CONFIRMED = 'ORDER_CONFIRMED';
+
 /**
  * ACTION CREATORS
  */
 
+const orderConfirmed = order => ({
+  type: ORDER_CONFIRMED,
+  order,
+});
+
 /**
  * THUNK CREATORS
  */
+
 export const submitOrder = formData => async dispatch => {
   try {
-    console.log('THUNK formData', formData);
     const { data } = await axios.put(`/api/orders/`, formData);
-    // FINISH
-    console.log('THUNK AFTER ORDER PROCESSED', data);
+    dispatch(orderConfirmed(data));
+    history.push({ pathname: '/confirmation' });
   } catch (err) {
     console.error(err);
   }
@@ -30,8 +37,18 @@ export const submitOrder = formData => async dispatch => {
 /**
  * REDUCERS
  */
+
 export default (state = {}, action) => {
   switch (action.type) {
+    case ORDER_CONFIRMED:
+      return {
+        ...state,
+        order: {
+          ...action.order.address,
+          id: action.order.order.id,
+          items: action.order.items,
+        },
+      };
     default:
       return state;
   }

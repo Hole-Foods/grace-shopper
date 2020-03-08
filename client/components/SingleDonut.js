@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleDonut } from '../store/donut';
+import ReviewList from './ReviewList';
 import { addItemToCart } from '../store/cart';
+import FadeIn from 'react-fade-in';
 
 const SingleDonut = props => {
   // declare dispatch function - always when you need dispatch
@@ -20,14 +22,8 @@ const SingleDonut = props => {
     evt.preventDefault();
     const qty = parseInt(evt.target.qty.value);
     if (qty > 0 && qty <= donut.qty) {
-      dispatch(
-        addItemToCart({
-          donutId: props.match.params.donutId,
-          qty,
-        })
-      );
+      dispatch(addItemToCart({ donutId: donut.id, qty }));
     }
-    props.history.push('/cart');
   };
 
   if (!donut) {
@@ -39,7 +35,19 @@ const SingleDonut = props => {
       <div>
         <div className="singleDonut">
           <h1>{donut.name}</h1>
-          <img src={donut.imageUrl} />
+          <p>
+            Average Rating:&nbsp;
+            {donut.reviews
+              ? donut.reviews
+                  .reduce((acc, item) => {
+                    return acc + item.rating / donut.reviews.length;
+                  }, 0)
+                  .toFixed(2)
+              : null}
+          </p>
+          <FadeIn transitionDuration="1000">
+            <img src={donut.imageUrl} />
+          </FadeIn>
           <p>{donut.description}</p>
           <form id="add-to-cart" onSubmit={addToCart}>
             <input name="qty" type="number" min="1" max={donut.qty} />
@@ -47,16 +55,9 @@ const SingleDonut = props => {
               Add to cart
             </button>
           </form>
-          <h2>Donut Reviews</h2>
-          {donut.reviews
-            ? donut.reviews.map(review => (
-                <div key={review.id}>
-                  <h3>Review</h3>
-                  <h4>Stars: {review.rating}</h4>
-                  <p>{review.content}</p>
-                </div>
-              ))
-            : null}
+          <br />
+          <h2>Reviews</h2>
+          <ReviewList reviews={donut.reviews} />
         </div>
       </div>
     </>

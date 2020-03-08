@@ -18,7 +18,9 @@ const CartItem = props => {
   const dispatch = useDispatch();
 
   const addToCart = () => {
-    dispatch(addItemToCart({ donutId: item.donutId, qty: 1 }));
+    if (item.qty < item.donut.qty) {
+      dispatch(addItemToCart({ donutId: item.donutId, qty: 1 }));
+    }
   };
 
   const subtractFromCart = () => {
@@ -30,7 +32,7 @@ const CartItem = props => {
   const deleteFromCart = () => {
     dispatch(deleteItemFromCart(item.donutId));
   };
-  console.log('CART ITEM ID: ', item.donutId);
+
   return (
     <>
       <DefaultDiv>
