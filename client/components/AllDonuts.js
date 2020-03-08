@@ -5,6 +5,7 @@ import { fetchDonuts } from '../store/donuts';
 import { addItemToCart } from '../store/cart';
 import styled from 'styled-components';
 import FadeIn from 'react-fade-in';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const AllDonuts = () => {
   // declare dispatch function - always when you need dispatch

@@ -46,6 +46,7 @@ const SingleDonut = props => {
       <div>
         <div className="singleDonut">
           <h1>{donut.name}</h1>
+          <p>${donut.price}</p>
           <p>
             Average Rating:&nbsp;
             {donut.reviews
