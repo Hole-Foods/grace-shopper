@@ -19,7 +19,7 @@ const Cart = () => {
   if (cart.length === 0) {
     return <div>N🍩 donuts in cart</div>;
   }
-
+  console.log('CART', cart);
   return (
     <>
       <DefaultDiv>

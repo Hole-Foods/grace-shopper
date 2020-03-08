@@ -35,6 +35,10 @@ const SingleDonut = props => {
   }
   // console.log('SINGLEDONUT DONUTREVIEWS', donut.reviews);
 
+  // if (donut.reviews) {
+  //   console.log('donut.reviews1', donut.reviews.length);
+  // }
+
   return (
     <>
       <div>
@@ -50,7 +54,14 @@ const SingleDonut = props => {
           </form>
           <br />
           <h2>Reviews</h2>
-          <p>Average Rating: 5</p>
+          <p>
+            Average Rating:&nbsp;
+            {donut.reviews
+              ? donut.reviews.reduce((acc, item) => {
+                  return acc + item.rating / donut.reviews.length;
+                }, 0)
+              : null}
+          </p>
           <ReviewList reviews={donut.reviews} />
         </div>
       </div>
@@ -59,3 +70,9 @@ const SingleDonut = props => {
 };
 
 export default SingleDonut;
+
+// {
+//   donut.reviews.reduce((acc, item) => {
+//     return acc + item.rating / donut.reviews.length;
+//   }, 0);
+// }
