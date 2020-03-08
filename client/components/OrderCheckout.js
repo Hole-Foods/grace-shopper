@@ -19,6 +19,7 @@ const OrderCheckout = () => {
       user: state.user,
     };
   });
+
   useEffect(() => {
     dispatch(fetchCart(user.id));
   }, []);
@@ -157,7 +158,7 @@ const OrderCheckout = () => {
 
               <div className="col-md-6">{item.donut.name}</div>
               <div className="col-md-2">{item.qty}</div>
-              <div className="col-md-2">{item.donut.price.toFixed(2)}</div>
+              <div className="col-md-2">{item.donut.price}</div>
             </div>
           ))}
           <div className="row">
@@ -166,11 +167,9 @@ const OrderCheckout = () => {
             <div className="col-md-2">total</div>
             <div className="col-md-2">
               $
-              {cart
-                .reduce((acc, item) => {
-                  return acc + item.donut.price * item.qty;
-                }, 0)
-                .toFixed(2)}
+              {cart.reduce((acc, item) => {
+                return acc + item.donut.price * item.qty;
+              }, 0)}
             </div>
           </div>
         </div>
