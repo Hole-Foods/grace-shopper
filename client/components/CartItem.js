@@ -27,7 +27,7 @@ const CartItem = props => {
   const deleteFromCart = () => {
     dispatch(deleteItemFromCart(item.donutId));
   };
-  console.log('CART ITEM ID: ', item.donutId);
+
   return (
     <>
       <DefaultDiv>

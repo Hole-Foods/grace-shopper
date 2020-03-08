@@ -47,8 +47,11 @@ router.put('/', async (req, res, next) => {
       let update = false;
       const cart = req.session.cart;
       for (let i = 0; i < cart.length; i++) {
-        if (cart[i].donutId === req.body.donutId) {
+        if (cart[i].donutId == req.body.donutId) {
           cart[i].qty += req.body.qty;
+          if (cart[i].qty > cart[i].donut.qty) {
+            cart[i].qty = cart[i].donut.qty;
+          }
           update = true;
         }
       }
