@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const db = require('../db');
 const { User, Address, Order, OrderItem, Donut } = require('../db/models');
 const { isLoggedIn } = require('../utils');
 module.exports = router;
@@ -17,6 +18,8 @@ const adjustStock = async (id, qty) => {
 
 router.put('/', isLoggedIn, async (req, res, next) => {
   try {
+    const result = await db.transaction(async t => {});
+
     const [address, wasCreated] = await Address.findOrCreate({
       where: { address1: req.body.address1, address2: req.body.address2 },
       defaults: {

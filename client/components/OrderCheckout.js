@@ -8,7 +8,7 @@ import { fetchCart } from '../store/cart';
 
 //
 
-const BillShip = () => {
+const OrderCheckout = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
 
@@ -179,4 +179,4 @@ const BillShip = () => {
   );
 };
 
-export default BillShip;
+export default OrderCheckout;
