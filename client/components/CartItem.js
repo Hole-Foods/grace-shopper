@@ -4,6 +4,11 @@ import { useDispatch } from 'react-redux';
 import { addItemToCart, deleteItemFromCart } from '../store/cart';
 import { Link } from 'react-router-dom';
 
+export const dollaDollaBillzYall = total => {
+  const decimalized = parseFloat(total).toFixed(2);
+  return decimalized;
+};
+
 const CartItem = props => {
   if (!props.item) {
     return <div>500 the donut expl💥ded</div>;
@@ -48,7 +53,9 @@ const CartItem = props => {
               +
             </button>
           </div>
-          <div className="col">${item.donut.price * item.qty}</div>
+          <div className="col">
+            ${dollaDollaBillzYall(item.donut.price * item.qty)}
+          </div>
         </div>
       </DefaultDiv>
     </>
