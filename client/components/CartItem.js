@@ -13,11 +13,15 @@ const CartItem = props => {
   const dispatch = useDispatch();
 
   const addToCart = () => {
-    dispatch(addItemToCart({ donutId: item.donutId, qty: 1 }));
+    if (item.qty < item.donut.qty) {
+      dispatch(addItemToCart({ donutId: item.donutId, qty: 1 }));
+    }
   };
 
   const subtractFromCart = () => {
-    dispatch(addItemToCart({ donutId: item.donutId, qty: -1 }));
+    if (item.qty > 0) {
+      dispatch(addItemToCart({ donutId: item.donutId, qty: -1 }));
+    }
   };
 
   const deleteFromCart = () => {

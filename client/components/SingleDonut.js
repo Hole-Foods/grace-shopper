@@ -23,7 +23,7 @@ const SingleDonut = props => {
       dispatch(
         addItemToCart({
           donutId: props.match.params.donutId,
-          qty,
+          qty: parseInt(qty),
         })
       );
     }
