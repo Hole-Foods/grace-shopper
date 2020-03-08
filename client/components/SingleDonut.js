@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleDonut } from '../store/donut';
 import ReviewList from './ReviewList';
 import { addItemToCart } from '../store/cart';
+import FadeIn from 'react-fade-in';
 
 const SingleDonut = props => {
   // declare dispatch function - always when you need dispatch
@@ -41,6 +42,7 @@ const SingleDonut = props => {
 
   return (
     <>
+      {/* <FadeIn transitionDuration="1000"> */}
       <div>
         <div className="singleDonut">
           <h1>{donut.name}</h1>
@@ -54,7 +56,9 @@ const SingleDonut = props => {
                   .toFixed(2)
               : null}
           </p>
-          <img src={donut.imageUrl} />
+          <FadeIn transitionDuration="1000">
+            <img src={donut.imageUrl} />
+          </FadeIn>
           <p>{donut.description}</p>
           <form id="add-to-cart" onSubmit={addToCart}>
             <input name="qty" type="number" min="1" max={donut.qty} />
@@ -67,6 +71,7 @@ const SingleDonut = props => {
           <ReviewList reviews={donut.reviews} />
         </div>
       </div>
+      {/* </FadeIn> */}
     </>
   );
 };

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'; // import redux hooks
 import { fetchDonuts } from '../store/donuts';
 import { addItemToCart } from '../store/cart';
 import styled from 'styled-components';
+import FadeIn from 'react-fade-in';
 
 const AllDonuts = () => {
   // declare dispatch function - always when you need dispatch
@@ -29,7 +30,9 @@ const AllDonuts = () => {
             <div className="col-md">
               <div className="card">
                 <Link to={`/donuts/${donut.id}`}>
-                  <img src={donut.imageUrl} className="card-img-top" />
+                  <FadeIn transitionDuration="1000">
+                    <img src={donut.imageUrl} className="card-img-top" />
+                  </FadeIn>
                 </Link>
                 <div className="card-body">
                   <Link to={`/donuts/${donut.id}`}>
