@@ -45,20 +45,21 @@ router.put('/', async (req, res, next) => {
         req.session.cart = [];
       }
       let update = false;
-      const updatedCart = req.session.cart.map(el => {
-        if (el.donutId === req.body.donutId) {
-          el.qty += req.body.qty;
+      const cart = req.session.cart;
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].donutId === req.body.donutId) {
+          cart[i].qty += req.body.qty;
           update = true;
         }
-        return el;
-      });
-      const donut = await Donut.findByPk(req.body.donutId);
-      const addDonut = { ...req.body, donut };
-      if (update === false) {
-        updatedCart.push(addDonut);
       }
-      req.session.cart = updatedCart;
-      res.json(addDonut);
+      if (update === false) {
+        const donut = await Donut.findByPk(req.body.donutId);
+        const addDonut = { ...req.body, donut };
+        cart.push(addDonut);
+      }
+      req.session.cart = cart;
+      const inArr = cart.find(e => e.donutId === req.body.donutId);
+      res.json(inArr);
     }
   } catch (err) {
     next(err);
