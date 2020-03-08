@@ -6,12 +6,14 @@ import CartItem from './CartItem';
 
 const Cart = () => {
   const dispatch = useDispatch();
+
   const { cart, user } = useSelector(state => {
     return {
       cart: state.cart,
       user: state.user,
     };
   });
+
   useEffect(() => {
     dispatch(fetchCart(user.id));
   }, []);

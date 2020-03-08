@@ -57,7 +57,11 @@ router.put('/', async (req, res, next) => {
       }
       if (update === false) {
         const donut = await Donut.findByPk(req.body.donutId);
-        const addDonut = { ...req.body, donut };
+        const addDonut = {
+          donutId: req.body.donutId,
+          qty: parseInt(req.body.qty),
+          donut,
+        };
         cart.push(addDonut);
       }
       req.session.cart = cart;
