@@ -8,7 +8,8 @@ import {
   UserHome,
   AllDonuts,
   Cart,
-  BillShip,
+  OrderCheckout,
+  OrderConfirmation,
   SingleDonut,
 } from './components';
 import { me } from './store';
@@ -30,7 +31,8 @@ class Routes extends Component {
         {/* <Route path="/donut/:donutId" component={SingleDonut} /> */}
         <Route path="/donuts/:donutId" component={SingleDonut} />
         <Route path="/cart" component={Cart} />
-        <Route path="/billship" component={BillShip} />
+        <Route path="/checkout" component={OrderCheckout} />
+        <Route path="/confirmation" component={OrderConfirmation} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/all" component={AllDonuts} />
