@@ -33,7 +33,8 @@ const SingleDonut = props => {
   if (!donut) {
     return <div>4🍩4 no donut found</div>;
   }
-  console.log('SINGLEDONUT DONUTREVIEWS', donut.reviews);
+  // console.log('SINGLEDONUT DONUTREVIEWS', donut.reviews);
+
   return (
     <>
       <div>
@@ -47,17 +48,10 @@ const SingleDonut = props => {
               Add to cart
             </button>
           </form>
+          <br />
+          <h2>Reviews</h2>
+          <p>Average Rating: 5</p>
           <ReviewList reviews={donut.reviews} />
-          {/* <h2>Donut Reviews</h2>
-          {donut.reviews
-            ? donut.reviews.map(review => (
-                <div key={review.id}>
-                  <h3>Review</h3>
-                  <h4>Stars: {review.rating}</h4>
-                  <p>{review.content}</p>
-                </div>
-              ))
-            : null} */}
         </div>
       </div>
     </>
