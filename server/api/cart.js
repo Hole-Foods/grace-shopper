@@ -73,10 +73,12 @@ router.delete('/:donutId', async (req, res, next) => {
       });
       await toDelete.destroy();
     } else {
-      const guestCart = req.session.cart.filter(
-        cartItem => cartItem.donutId !== req.params.donutId
+      const guestCart = req.session.cart;
+      const updatedCart = guestCart.filter(
+        item => item.donutId != req.params.donutId
       );
-      req.session.cart = guestCart;
+      console.log(updatedCart);
+      req.session.cart = updatedCart;
     }
     res.sendStatus(204);
   } catch (err) {
