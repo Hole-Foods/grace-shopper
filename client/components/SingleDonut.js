@@ -44,6 +44,16 @@ const SingleDonut = props => {
       <div>
         <div className="singleDonut">
           <h1>{donut.name}</h1>
+          <p>
+            Average Rating:&nbsp;
+            {donut.reviews
+              ? donut.reviews
+                  .reduce((acc, item) => {
+                    return acc + item.rating / donut.reviews.length;
+                  }, 0)
+                  .toFixed(2)
+              : null}
+          </p>
           <img src={donut.imageUrl} />
           <p>{donut.description}</p>
           <form id="add-to-cart" onSubmit={addToCart}>
@@ -54,14 +64,6 @@ const SingleDonut = props => {
           </form>
           <br />
           <h2>Reviews</h2>
-          <p>
-            Average Rating:&nbsp;
-            {donut.reviews
-              ? donut.reviews.reduce((acc, item) => {
-                  return acc + item.rating / donut.reviews.length;
-                }, 0)
-              : null}
-          </p>
           <ReviewList reviews={donut.reviews} />
         </div>
       </div>
