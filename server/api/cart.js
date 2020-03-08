@@ -65,15 +65,16 @@ router.put('/', async (req, res, next) => {
   }
 });
 
-router.delete('/', async (req, res, next) => {
+router.delete('/:donutId', async (req, res, next) => {
   try {
     if (req.user) {
-      await CartItem.destroy({
-        where: { userId: req.user.id, donutId: req.body.donutId },
+      const toDelete = await CartItem.findOne({
+        where: { userId: req.user.id, donutId: req.params.donutId },
       });
+      await toDelete.destroy();
     } else {
       const guestCart = req.session.cart.filter(
-        cartItem => cartItem.donutId !== req.body.donutId
+        cartItem => cartItem.donutId !== req.params.donutId
       );
       req.session.cart = guestCart;
     }

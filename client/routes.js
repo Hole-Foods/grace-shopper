@@ -33,7 +33,7 @@ class Routes extends Component {
         <Route path="/billship" component={BillShip} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/all" component={AllDonuts} />
+        <Route path="/donuts" component={AllDonuts} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -41,6 +41,10 @@ class Routes extends Component {
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
+        <Route
+          path="/:doesnotexist"
+          render={() => <h1>4🍩4 Page Not Found</h1>}
+        />
         <Route component={Login} />
       </Switch>
     );

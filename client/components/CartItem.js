@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { addItemToCart } from '../store/cart';
+import { addItemToCart, deleteItemFromCart } from '../store/cart';
+import { Link } from 'react-router-dom';
 
 export const dollaDollaBillzYall = total => {
   const decimalized = parseFloat(total).toFixed(2);
@@ -10,7 +11,7 @@ export const dollaDollaBillzYall = total => {
 
 const CartItem = props => {
   if (!props.item) {
-    return <div>4🍩4 no donut found</div>;
+    return <div>500 the donut expl💥ded</div>;
   }
   const { item } = props;
 
@@ -26,11 +27,20 @@ const CartItem = props => {
     }
   };
 
+  const deleteFromCart = () => {
+    dispatch(deleteItemFromCart(item.donutId));
+  };
+  console.log('CART ITEM ID: ', item.donutId);
   return (
     <>
       <DefaultDiv>
         <div className="row">
-          <div className="col">{item.donut.name}</div>
+          <div className="col">
+            <Link to={`/donuts/${item.donutId}`}>{item.donut.name}</Link>
+            <button className="btn" onClick={deleteFromCart}>
+              x
+            </button>
+          </div>
           <div className="col">${item.donut.price}</div>
           <div className="col">
             <button className="btn" onClick={subtractFromCart}>
