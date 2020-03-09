@@ -11,8 +11,13 @@ const SingleReview = props => {
           <div className="col-sm">
             <div className="card">
               <div className="card-body">
-                <p className="card-title">Stars: {review.rating}</p>
+                <p>
+                  <small className="text-muted">Rating: {review.rating}</small>
+                </p>
                 <p className="card-text">{review.content}</p>
+                <p>
+                  <small className="text-muted">Submitted by User</small>
+                </p>
               </div>
             </div>
           </div>

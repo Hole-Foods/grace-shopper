@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'; // import redux hooks
 import { fetchDonuts } from '../store/donuts';
 import { addItemToCart } from '../store/cart';
+import Pagination from './Pagination';
 import styled from 'styled-components';
 import FadeIn from 'react-fade-in';
 
@@ -22,6 +23,10 @@ const AllDonuts = () => {
     dispatch(addItemToCart({ donutId, qty: 1 }));
   };
 
+  console.log('DONUTS: ', donuts);
+
+  //GET CURRENT POSTS
+
   return (
     <div className="container">
       <div className="row">
@@ -31,7 +36,10 @@ const AllDonuts = () => {
               <div className="card">
                 <Link to={`/donuts/${donut.id}`}>
                   <FadeIn transitionDuration="1000">
-                    <img src={donut.imageUrl} className="card-img-top" />
+                    <img
+                      src={donut.imageUrl}
+                      className="card-img-top px-3 py-3"
+                    />
                   </FadeIn>
                 </Link>
                 <div className="card-body">
@@ -52,18 +60,13 @@ const AllDonuts = () => {
           </DefaultDiv>
         ))}
       </div>
+      <Pagination />
     </div>
   );
 };
 
 export default AllDonuts;
-// const mapStateToProps = state => {
-//   return {
-//     donuts: state.donuts,
-//   };
-// };
 
-// export default connect(mapStateToProps)(AllDonuts);
 const DefaultDiv = styled.div`
   max-width: 18rem;
   max-height: 25rem;

@@ -16,17 +16,17 @@ const UserHome = () => {
     };
   });
 
-  console.log('USER: ', user);
-  console.log('USER INFO: ', userInfo);
-
   useEffect(() => {
     dispatch(fetchUserInfo(user.id));
   }, []);
 
+  //Drop down menu with reviews, order history
+  //edit shipping and credit card information
+
   return (
     <div>
       <h3>Welcome, {user.email}</h3>
-      <h3>Your Reviews: </h3>
+      <h3>View Reviews: </h3>
       {userInfo.reviews ? (
         <ReviewList reviews={userInfo.reviews} />
       ) : (
@@ -37,21 +37,3 @@ const UserHome = () => {
 };
 
 export default UserHome;
-
-/**
- * CONTAINER
- */
-// const mapState = state => {
-//   return {
-//     email: state.user.email
-//   }
-// }
-
-// export default connect(mapState)(UserHome)
-
-/**
- * PROP TYPES
- */
-// UserHome.propTypes = {
-//   email: PropTypes.string
-// }

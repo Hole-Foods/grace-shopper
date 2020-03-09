@@ -11,7 +11,8 @@ const {
 
 const NUM_USERS = 5;
 const NUM_CATEGORIES = 5;
-const NUM_DONUTS = 100;
+const NUM_DONUTS = 10;
+const NUM_QTY = 10;
 const NUM_REVIEWS = 10;
 const NUM_CART_ITEMS = 5; // FOR USER EMAIL@EMAIL.COM
 
@@ -56,7 +57,7 @@ const randomDonut = () => {
     name: randomName(),
     description: chance.paragraph({ sentences: 10 }),
     price: chance.floating({ min: 0, max: 100, fixed: 2 }),
-    qty: `${NUM_DONUTS}`,
+    qty: `${NUM_QTY}`,
     categoryId: chance.integer({ min: 1, max: `${NUM_CATEGORIES}` }),
   });
 };
@@ -92,6 +93,7 @@ const seed = async () => {
     await User.create({
       email: 'email@email.com',
       password: '123',
+      isAdmin: true,
     });
 
     await Promise.all(users.map(user => user.save()));
