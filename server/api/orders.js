@@ -24,6 +24,7 @@ router.put('/', isLoggedIn, async (req, res, next) => {
   try {
     const result = await db.transaction(async t => {
       // transaction start
+
       const [address] = await Address.findOrCreate({
         where: { address1: req.body.address1, address2: req.body.address2 },
         defaults: {
@@ -55,6 +56,7 @@ router.put('/', isLoggedIn, async (req, res, next) => {
       const order = await Order.create();
       await order.setUser(user);
       await order.setAddress(address);
+      //This needs to happen for the user
 
       const orderItems = await Promise.all(
         cartItems.map(async item => {

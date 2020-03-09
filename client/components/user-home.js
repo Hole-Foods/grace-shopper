@@ -23,6 +23,8 @@ const UserHome = () => {
   //Drop down menu with reviews, order history
   //edit shipping and credit card information
 
+  console.log('USER INFO: ', userInfo);
+
   return (
     <div>
       <h3>Welcome, {user.email}</h3>

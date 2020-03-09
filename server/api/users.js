@@ -1,5 +1,13 @@
 const router = require('express').Router();
-const { User, Review, Donut, CartItem } = require('../db/models');
+const {
+  User,
+  Review,
+  Donut,
+  CartItem,
+  Order,
+  OrderItem,
+  Address,
+} = require('../db/models');
 module.exports = router;
 
 router.get('/', async (req, res, next) => {
@@ -21,7 +29,7 @@ router.get('/:userId', async (req, res, next) => {
   try {
     const users = await User.findByPk(req.params.userId, {
       attributes: ['id', 'email'],
-      include: [Review], //future add past orders here
+      include: [Review, Order, Address],
     });
     res.json(users);
   } catch (err) {
