@@ -5,12 +5,12 @@ const ReviewList = props => {
   const { reviews } = props;
 
   if (!props.reviews || !props.reviews.length) {
-    return <div>No reviews for this donut yet. Write one!</div>;
+    return <div className="mb-3">No reviews for this donut yet.</div>;
   }
 
   return (
     <div>
-      <SingleReview reviews={reviews} />;
+      <SingleReview reviews={reviews} />
     </div>
   );
 };

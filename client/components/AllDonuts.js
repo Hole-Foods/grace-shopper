@@ -46,7 +46,7 @@ const AllDonuts = () => {
                   <Link to={`/donuts/${donut.id}`}>
                     <h5 className="card-title">{donut.name}</h5>
                   </Link>
-                  <p className="card-text">${donut.price}</p>
+                  <p className="card-text text-muted">${donut.price}</p>
                   <button
                     type="submit"
                     className="btn btn-primary"

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleDonut } from '../store/donut';
 import { addItemToCart } from '../store/cart';
 import ReviewList from './ReviewList';
+import AddReviewForm from './AddReviewForm';
 import FadeIn from 'react-fade-in';
 
 const SingleDonut = props => {
@@ -81,6 +82,9 @@ const SingleDonut = props => {
           </span>
         </h2>
         <ReviewList reviews={donut.reviews} />
+      </div>
+      <div className="container">
+        <AddReviewForm />
       </div>
     </>
   );
