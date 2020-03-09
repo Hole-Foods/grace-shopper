@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; // don't forget to import useEffect
+import React, { useEffect } from 'react'; // don't forget to import useEffect
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'; // import redux hooks
 import { fetchDonuts } from '../store/donuts';
@@ -63,13 +63,7 @@ const AllDonuts = () => {
 };
 
 export default AllDonuts;
-// const mapStateToProps = state => {
-//   return {
-//     donuts: state.donuts,
-//   };
-// };
 
-// export default connect(mapStateToProps)(AllDonuts);
 const DefaultDiv = styled.div`
   max-width: 18rem;
   max-height: 25rem;
