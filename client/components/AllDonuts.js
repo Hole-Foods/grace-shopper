@@ -8,11 +8,6 @@ import styled from 'styled-components';
 import FadeIn from 'react-fade-in';
 
 const AllDonuts = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(12);
-
   // declare dispatch function - always when you need dispatch
   const dispatch = useDispatch();
 
@@ -31,9 +26,6 @@ const AllDonuts = () => {
   console.log('DONUTS: ', donuts);
 
   //GET CURRENT POSTS
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = donuts.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
     <div className="container">
