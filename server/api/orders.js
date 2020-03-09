@@ -9,6 +9,8 @@ const {
   CartItem,
 } = require('../db/models');
 const { isLoggedIn } = require('../utils');
+const { STRIPE_KEY } = require('../../secrets');
+const stripe = require('stripe')(`${STRIPE_KEY}`);
 module.exports = router;
 
 const adjustStock = async (id, qty) => {
@@ -52,9 +54,21 @@ router.put('/', isLoggedIn, async (req, res, next) => {
       // add check if there are cart items
       //console.log(Object.keys(order.__proto__));
 
+      const token = req.body.token;
+
+      const charge = await stripe.charges.create({
+        amount: 999,
+        currency: 'usd',
+        description: 'Example charge',
+        source: token,
+      });
+
+      console.log('CHARGE', charge);
+
       const order = await Order.create();
       await order.setUser(user);
       await order.setAddress(address);
+      // get user address check added if not, set it
 
       const orderItems = await Promise.all(
         cartItems.map(async item => {
