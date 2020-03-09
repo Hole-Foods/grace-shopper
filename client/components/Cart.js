@@ -2,17 +2,19 @@ import React, { useEffect } from 'react'; // don't forget to import useEffect
 import { useDispatch, useSelector } from 'react-redux'; // import redux hooks
 import { fetchCart } from '../store/cart';
 import styled from 'styled-components';
-import CartItem from './CartItem';
+import CartItem, { dollaDollaBillzYall } from './CartItem';
 import FadeIn from 'react-fade-in';
 
 const Cart = () => {
   const dispatch = useDispatch();
+
   const { cart, user } = useSelector(state => {
     return {
       cart: state.cart,
       user: state.user,
     };
   });
+
   useEffect(() => {
     dispatch(fetchCart(user.id));
   }, []);
@@ -20,7 +22,7 @@ const Cart = () => {
   if (cart.length === 0) {
     return <div>N🍩 donuts in cart</div>;
   }
-  console.log('CART', cart);
+
   return (
     <>
       <FadeIn transitionDuration="1000">
@@ -42,11 +44,11 @@ const Cart = () => {
               <div className="col">Total</div>
               <div className="col">
                 $
-                {cart
-                  .reduce((acc, item) => {
+                {dollaDollaBillzYall(
+                  cart.reduce((acc, item) => {
                     return acc + item.donut.price * item.qty;
                   }, 0)
-                  .toFixed(2)}
+                )}
               </div>
             </div>
           </div>

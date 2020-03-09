@@ -7,7 +7,6 @@ const ReviewList = props => {
   if (!props.reviews || !props.reviews.length) {
     return <div>No reviews for this donut yet. Write one!</div>;
   }
-  // console.log('REVIEW LIST PROPS', props);
 
   return (
     <div>
