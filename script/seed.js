@@ -93,6 +93,7 @@ const seed = async () => {
     await User.create({
       email: 'email@email.com',
       password: '123',
+      isAdmin: true,
     });
 
     await Promise.all(users.map(user => user.save()));
