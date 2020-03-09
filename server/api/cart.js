@@ -45,20 +45,28 @@ router.put('/', async (req, res, next) => {
         req.session.cart = [];
       }
       let update = false;
-      const updatedCart = req.session.cart.map(el => {
-        if (el.donutId === req.body.donutId) {
-          el.qty += req.body.qty;
+      const cart = req.session.cart;
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].donutId == req.body.donutId) {
+          cart[i].qty += req.body.qty;
+          if (cart[i].qty > cart[i].donut.qty) {
+            cart[i].qty = cart[i].donut.qty;
+          }
           update = true;
         }
-        return el;
-      });
-      const donut = await Donut.findByPk(req.body.donutId);
-      const addDonut = { ...req.body, donut };
-      if (update === false) {
-        updatedCart.push(addDonut);
       }
-      req.session.cart = updatedCart;
-      res.json(addDonut);
+      if (update === false) {
+        const donut = await Donut.findByPk(req.body.donutId);
+        const addDonut = {
+          donutId: req.body.donutId,
+          qty: parseInt(req.body.qty),
+          donut,
+        };
+        cart.push(addDonut);
+      }
+      req.session.cart = cart;
+      const inArr = cart.find(e => e.donutId === req.body.donutId);
+      res.json(inArr);
     }
   } catch (err) {
     next(err);
@@ -73,10 +81,12 @@ router.delete('/:donutId', async (req, res, next) => {
       });
       await toDelete.destroy();
     } else {
-      const guestCart = req.session.cart.filter(
-        cartItem => cartItem.donutId !== req.params.donutId
+      const guestCart = req.session.cart;
+      const updatedCart = guestCart.filter(
+        item => item.donutId != req.params.donutId
       );
-      req.session.cart = guestCart;
+      console.log(updatedCart);
+      req.session.cart = updatedCart;
     }
     res.sendStatus(204);
   } catch (err) {

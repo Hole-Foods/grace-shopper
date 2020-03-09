@@ -1,12 +1,5 @@
 const router = require('express').Router();
-const {
-  User,
-  Address,
-  CartItem,
-  Order,
-  OrderItem,
-  Donut,
-} = require('../db/models');
+const { User, Address, Order, OrderItem, Donut } = require('../db/models');
 const { isLoggedIn } = require('../utils');
 module.exports = router;
 
@@ -23,13 +16,12 @@ const adjustStock = async (id, qty) => {
 };
 
 router.put('/', isLoggedIn, async (req, res, next) => {
-  // FORM INFO ON REQ.BODY -> TODO: CREATE ADDRESS TABLE
-  console.log('********************REQ DOT BODY', req.body);
-  console.log(req.user.id);
   try {
     const [address, wasCreated] = await Address.findOrCreate({
       where: { address1: req.body.address1, address2: req.body.address2 },
       defaults: {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         address2: req.body.address2,
         city: req.body.city,
         state: req.body.state,
@@ -37,10 +29,6 @@ router.put('/', isLoggedIn, async (req, res, next) => {
         country: req.body.country,
       },
     });
-
-    const addressId = address.id;
-
-    console.log('********************* address', address);
 
     const user = await User.findByPk(req.user.id);
     //console.log(Object.keys(user.__proto__));
@@ -52,9 +40,8 @@ router.put('/', isLoggedIn, async (req, res, next) => {
         },
       ],
     });
-    //console.log('CART ITEMS', cartItems);
-    //cartItems[0].qty = 11111;
 
+    //cartItems[0].qty = 11111;
     // IMPORTANT: NEED TO ADD CHECK IF CART COMES BACK EMPTY
 
     const notInStock = checkStock(cartItems);
@@ -85,7 +72,20 @@ router.put('/', isLoggedIn, async (req, res, next) => {
 
     //await CartItem.destroy({ where: { userId: user.id } }); // finally destroy cart items
 
-    res.json(order);
+    const items = await order.getOrderItems({
+      include: [
+        {
+          model: Donut,
+          attributes: ['name', 'imageUrl', 'qty', 'price'],
+        },
+      ],
+    });
+
+    res.json({
+      order,
+      items,
+      address,
+    });
   } catch (err) {
     next(err);
   }

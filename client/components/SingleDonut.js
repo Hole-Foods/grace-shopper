@@ -22,28 +22,16 @@ const SingleDonut = props => {
     evt.preventDefault();
     const qty = parseInt(evt.target.qty.value);
     if (qty > 0 && qty <= donut.qty) {
-      dispatch(
-        addItemToCart({
-          donutId: props.match.params.donutId,
-          qty,
-        })
-      );
+      dispatch(addItemToCart({ donutId: donut.id, qty }));
     }
-    props.history.push('/cart');
   };
 
   if (!donut) {
     return <div>4🍩4 no donut found</div>;
   }
-  // console.log('SINGLEDONUT DONUTREVIEWS', donut.reviews);
-
-  // if (donut.reviews) {
-  //   console.log('donut.reviews1', donut.reviews.length);
-  // }
 
   return (
     <>
-      {/* <FadeIn transitionDuration="1000"> */}
       <div>
         <div className="singleDonut">
           <h1>{donut.name}</h1>
@@ -72,15 +60,8 @@ const SingleDonut = props => {
           <ReviewList reviews={donut.reviews} />
         </div>
       </div>
-      {/* </FadeIn> */}
     </>
   );
 };
 
 export default SingleDonut;
-
-// {
-//   donut.reviews.reduce((acc, item) => {
-//     return acc + item.rating / donut.reviews.length;
-//   }, 0);
-// }
