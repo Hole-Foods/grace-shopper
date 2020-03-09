@@ -11,6 +11,7 @@ import {
   OrderCheckout,
   OrderConfirmation,
   SingleDonut,
+  AddDonutForm,
 } from './components';
 import { me } from './store';
 
@@ -23,13 +24,14 @@ class Routes extends Component {
   }
 
   render() {
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn, isAdmin } = this.props;
 
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
         {/* <Route path="/donut/:donutId" component={SingleDonut} /> */}
         <Route path="/donuts/:donutId" component={SingleDonut} />
+        <Route path="/admin/add-donut" component={AddDonutForm} />
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={OrderCheckout} />
         <Route path="/confirmation" component={OrderConfirmation} />
@@ -42,6 +44,9 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
           </Switch>
         )}
+        {/* <Route path="/admin/edit-donut" component={EditInventoryForm} />
+            <Route path="/admin/all-orders" component={AllOrders} />
+            <Route path="/admin/all-users" component={AllUsers} /> */}
         {/* Displays our Login component as a fallback */}
         <Route
           path="/:doesnotexist"
@@ -61,6 +66,7 @@ const mapState = state => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
+    isAdmin: state.user.isAdmin,
   };
 };
 

@@ -12,7 +12,9 @@ const AllDonuts = () => {
   const dispatch = useDispatch();
 
   // just like map state to props but assigning to a const variable
-  const donuts = useSelector(state => state.donuts);
+  const { donuts, user } = useSelector(state => {
+    return { donuts: state.donuts, user: state.user };
+  });
 
   // just like component did mount
   useEffect(() => {
@@ -29,6 +31,15 @@ const AllDonuts = () => {
 
   return (
     <div className="container">
+      <div className="row">
+        <div className="col-md">
+          {user.isAdmin && (
+            <Link to="/admin/add-donut">
+              <button className="btn btn-primary">Add New Donut</button>
+            </Link>
+          )}
+        </div>
+      </div>
       <div className="row">
         {donuts.map(donut => (
           <DefaultDiv key={donut.id}>

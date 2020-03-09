@@ -11,6 +11,15 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.post('/', async (req, res, next) => {
+  try {
+    const donut = await Donut.create(req.body);
+    res.json(donut);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/:donutId', async (req, res, next) => {
   try {
     const donut = await Donut.findByPk(req.params.donutId, {

@@ -14,3 +14,6 @@ export { default as SingleDonut } from './SingleDonut';
 
 export { default as OrderCheckout } from './OrderCheckout';
 export { default as OrderConfirmation } from './OrderConfirmation';
+
+//admin only pages
+export { default as AddDonutForm } from './AddDonutForm';
