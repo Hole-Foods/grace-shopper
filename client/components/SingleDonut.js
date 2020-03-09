@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleDonut } from '../store/donut';
-import ReviewList from './ReviewList';
 import { addItemToCart } from '../store/cart';
+import ReviewList from './ReviewList';
 import FadeIn from 'react-fade-in';
+import styled from 'styled-components';
 
 const SingleDonut = props => {
   // declare dispatch function - always when you need dispatch
@@ -40,47 +40,93 @@ const SingleDonut = props => {
   //   console.log('donut.reviews1', donut.reviews.length);
   // }
 
+  // NULL REF ERROR
+  console.log('donut reviews: ', donut.reviews && donut.reviews.length);
+
   return (
     <>
-      {/* <FadeIn transitionDuration="1000"> */}
-      <div>
-        <div className="singleDonut">
-          <h1>{donut.name}</h1>
-          <p>${donut.price}</p>
-          <p>
+      <DefaultDiv>
+        <div className="card mb-3">
+          <div className="row no-gutters">
+            <div className="col-md-4">
+              <FadeIn transitionDuration="1000">
+                <img src={donut.imageUrl} className="card-img mt-5" />
+              </FadeIn>
+            </div>
+            <div className="col-md-8">
+              <div className="card-body">
+                <h5 className="card-title">{donut.name}</h5>
+                <p className="card-text">
+                  <small className="text-muted">${donut.price}</small>
+                </p>
+                <p className="card-text">
+                  <small className="text-muted">
+                    Average Rating:&nbsp;
+                    {donut.reviews
+                      ? donut.reviews
+                          .reduce((acc, item) => {
+                            return acc + item.rating / donut.reviews.length;
+                          }, 0)
+                          .toFixed(1)
+                      : null}
+                  </small>
+                </p>
+                <p className="card-text">{donut.description}</p>
+                <form id="add-to-cart" value="1" onSubmit={addToCart}>
+                  <input name="qty" type="number" min="1" max={donut.qty} />
+                  <div>
+                    <button type="submit" className="btn btn-primary">
+                      Add to cart
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2 className="text-primary">
+          <span className="badge badge-light">
+            {donut.reviews && donut.reviews.length ? donut.reviews.length : '0'}{' '}
+          </span>
+          Reviews
+        </h2>
+        <ReviewList reviews={donut.reviews} />
+        {/* <div className="col">
+          <h1 className="card-title">{donut.name}</h1>
+          <p className="card-text">${donut.price}</p>
+          <p className="card-text">
             Average Rating:&nbsp;
             {donut.reviews
               ? donut.reviews
                   .reduce((acc, item) => {
                     return acc + item.rating / donut.reviews.length;
                   }, 0)
-                  .toFixed(2)
+                  .toFixed(1)
               : null}
           </p>
           <FadeIn transitionDuration="1000">
-            <img src={donut.imageUrl} />
+            <img src={donut.imageUrl} className="card-img" />
           </FadeIn>
-          <p>{donut.description}</p>
+          <p className="card-text">{donut.description}</p>
           <form id="add-to-cart" onSubmit={addToCart}>
             <input name="qty" type="number" min="1" max={donut.qty} />
-            <button type="submit" className="btn btn-primary">
-              Add to cart
-            </button>
+            <div>
+              <button type="submit" className="btn btn-primary">
+                Add to cart
+              </button>
+            </div>
           </form>
           <br />
-          <h2>Reviews</h2>
-          <ReviewList reviews={donut.reviews} />
-        </div>
-      </div>
-      {/* </FadeIn> */}
+        </div> */}
+      </DefaultDiv>
     </>
   );
 };
 
 export default SingleDonut;
 
-// {
-//   donut.reviews.reduce((acc, item) => {
-//     return acc + item.rating / donut.reviews.length;
-//   }, 0);
-// }
+const DefaultDiv = styled.div`
+  max-width: 75%;
+  max-height: 25rem;
+`;

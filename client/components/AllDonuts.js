@@ -1,13 +1,18 @@
-import React, { useEffect } from 'react'; // don't forget to import useEffect
+import React, { useEffect, useState } from 'react'; // don't forget to import useEffect
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'; // import redux hooks
 import { fetchDonuts } from '../store/donuts';
 import { addItemToCart } from '../store/cart';
+import Pagination from './Pagination';
 import styled from 'styled-components';
 import FadeIn from 'react-fade-in';
-import InfiniteScroll from 'react-infinite-scroll-component';
 
 const AllDonuts = () => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(12);
+
   // declare dispatch function - always when you need dispatch
   const dispatch = useDispatch();
 
@@ -22,6 +27,13 @@ const AllDonuts = () => {
   const addToCart = donutId => {
     dispatch(addItemToCart({ donutId, qty: 1 }));
   };
+
+  console.log('DONUTS: ', donuts);
+
+  //GET CURRENT POSTS
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = donuts.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
     <div className="container">
@@ -53,6 +65,7 @@ const AllDonuts = () => {
           </DefaultDiv>
         ))}
       </div>
+      <Pagination />
     </div>
   );
 };

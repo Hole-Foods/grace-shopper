@@ -42,9 +42,11 @@ const Cart = () => {
               <div className="col">Total</div>
               <div className="col">
                 $
-                {cart.reduce((acc, item) => {
-                  return acc + item.donut.price * item.qty;
-                }, 0)}
+                {cart
+                  .reduce((acc, item) => {
+                    return acc + item.donut.price * item.qty;
+                  }, 0)
+                  .toFixed(2)}
               </div>
             </div>
           </div>

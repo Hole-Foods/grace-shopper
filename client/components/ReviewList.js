@@ -9,7 +9,11 @@ const ReviewList = props => {
   }
   // console.log('REVIEW LIST PROPS', props);
 
-  return <SingleReview reviews={reviews} />;
+  return (
+    <div>
+      <SingleReview reviews={reviews} />;
+    </div>
+  );
 };
 
 export default ReviewList;
