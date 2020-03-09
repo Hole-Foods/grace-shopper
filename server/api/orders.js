@@ -69,7 +69,7 @@ router.put('/', isLoggedIn, async (req, res, next) => {
 
       await order.setOrderItems(orderItems); // take in an array of order items
 
-      //await CartItem.destroy({ where: { userId: user.id } }); // finally destroy cart items
+      await CartItem.destroy({ where: { userId: user.id } }); // finally destroy cart items
 
       const items = await order.getOrderItems({
         include: [
