@@ -28,6 +28,7 @@ router.post('/login', async (req, res, next) => {
     } else {
       if (req.session.cart) {
         await mergeCarts(req.session.cart, user);
+        req.session.cart = [];
       }
       req.login(user, err => (err ? next(err) : res.json(user)));
     }
@@ -41,6 +42,7 @@ router.post('/signup', async (req, res, next) => {
     const user = await User.create(req.body);
     if (req.session.cart) {
       await mergeCarts(req.session.cart, user);
+      req.session.cart = [];
     }
     req.login(user, err => (err ? next(err) : res.json(user)));
   } catch (err) {

@@ -4,6 +4,7 @@ import { fetchCart } from '../store/cart';
 import styled from 'styled-components';
 import CartItem, { dollaDollaBillzYall } from './CartItem';
 import FadeIn from 'react-fade-in';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -50,6 +51,23 @@ const Cart = () => {
                   }, 0)
                 )}
               </div>
+            </div>
+            <div className="row">
+              {user.email ? (
+                <Link to="/checkout">
+                  <button className="btn btn-primary">Checkout</button>
+                </Link>
+              ) : (
+                <div>
+                  <Link to="/login">
+                    <button className="btn btn-primary">Log In</button>
+                  </Link>
+                  or
+                  <Link to="/signup">
+                    <button className="btn btn-primary">Sign Up</button>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </DefaultDiv>
