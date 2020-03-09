@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import CartItem, { dollaDollaBillzYall } from './CartItem';
 import FadeIn from 'react-fade-in';
 
-
 const Cart = () => {
   const dispatch = useDispatch();
 
@@ -48,7 +47,7 @@ const Cart = () => {
                 {dollaDollaBillzYall(
                   cart.reduce((acc, item) => {
                     return acc + item.donut.price * item.qty;
-                   }, 0)
+                  }, 0)
                 )}
               </div>
             </div>

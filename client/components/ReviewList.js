@@ -8,7 +8,11 @@ const ReviewList = props => {
     return <div>No reviews for this donut yet. Write one!</div>;
   }
 
-  return <SingleReview reviews={reviews} />;
+  return (
+    <div>
+      <SingleReview reviews={reviews} />;
+    </div>
+  );
 };
 
 export default ReviewList;
