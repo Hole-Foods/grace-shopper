@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleDonut } from '../store/donut';
-import ReviewList from './ReviewList';
 import { addItemToCart } from '../store/cart';
+import ReviewList from './ReviewList';
 import FadeIn from 'react-fade-in';
 
 const SingleDonut = props => {
@@ -30,35 +29,60 @@ const SingleDonut = props => {
     return <div>4🍩4 no donut found</div>;
   }
 
+  // NULL REF ERROR
+  console.log('donut reviews: ', donut.reviews && donut.reviews.length);
+
   return (
     <>
-      <div>
-        <div className="singleDonut">
-          <h1>{donut.name}</h1>
-          <p>
-            Average Rating:&nbsp;
-            {donut.reviews
-              ? donut.reviews
-                  .reduce((acc, item) => {
-                    return acc + item.rating / donut.reviews.length;
-                  }, 0)
-                  .toFixed(2)
-              : null}
-          </p>
-          <FadeIn transitionDuration="1000">
-            <img src={donut.imageUrl} />
-          </FadeIn>
-          <p>{donut.description}</p>
-          <form id="add-to-cart" onSubmit={addToCart}>
-            <input name="qty" type="number" min="1" max={donut.qty} />
-            <button type="submit" className="btn btn-primary">
-              Add to cart
-            </button>
-          </form>
-          <br />
-          <h2>Reviews</h2>
-          <ReviewList reviews={donut.reviews} />
+      {/* <DefaultDiv> */}
+      <div className="container">
+        <div className="card mb-3">
+          <div className="row no-gutters">
+            <div className="col-md-3">
+              <FadeIn transitionDuration="1000">
+                <img src={donut.imageUrl} className="card-img mt-6" />
+              </FadeIn>
+            </div>
+            <div className="col-md-8">
+              <div className="card-body">
+                <h5 className="card-title">{donut.name}</h5>
+                <p className="card-text">
+                  <small className="text-muted">${donut.price}</small>
+                </p>
+                <p className="card-text">
+                  <small className="text-muted">
+                    Average Rating:&nbsp;
+                    {donut.reviews
+                      ? donut.reviews
+                          .reduce((acc, item) => {
+                            return acc + item.rating / donut.reviews.length;
+                          }, 0)
+                          .toFixed(1)
+                      : null}
+                  </small>
+                </p>
+                <p className="card-text">{donut.description}</p>
+                <form id="add-to-cart" value="1" onSubmit={addToCart}>
+                  <input name="qty" type="number" min="1" max={donut.qty} />
+                  <div>
+                    <button type="submit" className="btn btn-primary">
+                      Add to cart
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <h2 className="text-primary">
+          <span className="badge badge-light">
+            {donut.reviews && donut.reviews.length ? donut.reviews.length : '0'}{' '}
+          </span>
+          Reviews
+        </h2>
+        <ReviewList reviews={donut.reviews} />
+        {/* </DefaultDiv> */}
       </div>
     </>
   );

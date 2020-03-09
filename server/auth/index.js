@@ -14,7 +14,6 @@ const mergeCarts = async (cart, user) => {
     const newQty = item.qty + cartItem.qty;
     await cartItem.update({ qty: newQty });
   }
-  
 };
 
 router.post('/login', async (req, res, next) => {

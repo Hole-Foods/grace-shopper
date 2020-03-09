@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'; // import redux hooks
 import { fetchDonuts } from '../store/donuts';
 import { addItemToCart } from '../store/cart';
+import Pagination from './Pagination';
 import styled from 'styled-components';
 import FadeIn from 'react-fade-in';
 
@@ -21,6 +22,10 @@ const AllDonuts = () => {
   const addToCart = donutId => {
     dispatch(addItemToCart({ donutId, qty: 1 }));
   };
+
+  console.log('DONUTS: ', donuts);
+
+  //GET CURRENT POSTS
 
   return (
     <div className="container">
@@ -52,18 +57,13 @@ const AllDonuts = () => {
           </DefaultDiv>
         ))}
       </div>
+      <Pagination />
     </div>
   );
 };
 
 export default AllDonuts;
-// const mapStateToProps = state => {
-//   return {
-//     donuts: state.donuts,
-//   };
-// };
 
-// export default connect(mapStateToProps)(AllDonuts);
 const DefaultDiv = styled.div`
   max-width: 18rem;
   max-height: 25rem;
