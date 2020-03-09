@@ -54,16 +54,20 @@ router.put('/', isLoggedIn, async (req, res, next) => {
       // add check if there are cart items
       //console.log(Object.keys(order.__proto__));
 
-      const token = req.body.token;
+      if (req.body.token) {
+        const total = cartItems.reduce((acc, item) => {
+          return acc + item.donut.price * item.qty * 100;
+        }, 0);
 
-      const charge = await stripe.charges.create({
-        amount: 999,
-        currency: 'usd',
-        description: 'Example charge',
-        source: token,
-      });
+        const charge = await stripe.charges.create({
+          amount: total,
+          currency: 'usd',
+          description: 'Hole Foods Bill',
+          source: req.body.token,
+        });
 
-      console.log('CHARGE', charge);
+        console.log('CHARGE', charge);
+      }
 
       const order = await Order.create();
       await order.setUser(user);
