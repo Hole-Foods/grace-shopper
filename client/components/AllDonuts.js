@@ -33,7 +33,7 @@ const AllDonuts = () => {
         {donuts.map(donut => (
           <DefaultDiv key={donut.id}>
             <div className="col-md">
-              <div className="card">
+              <div className="card mx-3 my-3">
                 <Link to={`/donuts/${donut.id}`}>
                   <FadeIn transitionDuration="1000">
                     <img

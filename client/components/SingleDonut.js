@@ -30,13 +30,12 @@ const SingleDonut = props => {
   }
 
   // NULL REF ERROR
-  console.log('donut reviews: ', donut.reviews && donut.reviews.length);
+  // console.log('donut reviews: ', donut.reviews && donut.reviews.length);
 
   return (
     <>
-      {/* <DefaultDiv> */}
       <div className="container">
-        <div className="card mb-3">
+        <div className="card mb-3 my-3">
           <div className="row no-gutters">
             <div className="col-md-3">
               <FadeIn transitionDuration="1000">
@@ -76,13 +75,12 @@ const SingleDonut = props => {
         </div>
 
         <h2 className="text-primary">
+          Reviews &nbsp;
           <span className="badge badge-light">
             {donut.reviews && donut.reviews.length ? donut.reviews.length : '0'}{' '}
           </span>
-          Reviews
         </h2>
         <ReviewList reviews={donut.reviews} />
-        {/* </DefaultDiv> */}
       </div>
     </>
   );

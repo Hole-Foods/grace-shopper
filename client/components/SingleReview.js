@@ -5,7 +5,7 @@ const SingleReview = props => {
   const { reviews } = props;
 
   return (
-    <div className="row">
+    <div className="row my-3">
       {reviews.map(review => (
         <DefaultDiv key={review.id}>
           <div className="col-sm">
