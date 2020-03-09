@@ -40,7 +40,7 @@ const SingleDonut = props => {
           <div className="row no-gutters">
             <div className="col-md-3">
               <FadeIn transitionDuration="1000">
-                <img src={donut.imageUrl} className="card-img mt-6" />
+                <img src={donut.imageUrl} className="card-img px-3 py-5" />
               </FadeIn>
             </div>
             <div className="col-md-8">

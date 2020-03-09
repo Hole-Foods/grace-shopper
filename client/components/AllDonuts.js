@@ -36,7 +36,10 @@ const AllDonuts = () => {
               <div className="card">
                 <Link to={`/donuts/${donut.id}`}>
                   <FadeIn transitionDuration="1000">
-                    <img src={donut.imageUrl} className="card-img-top" />
+                    <img
+                      src={donut.imageUrl}
+                      className="card-img-top px-3 py-3"
+                    />
                   </FadeIn>
                 </Link>
                 <div className="card-body">
