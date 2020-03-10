@@ -29,7 +29,15 @@ router.get('/:userId', async (req, res, next) => {
   try {
     const users = await User.findByPk(req.params.userId, {
       attributes: ['id', 'email'],
-      include: [Review, Order, Address],
+      include: [
+        { model: Order, include: [{ model: OrderItem }] },
+        {
+          model: Review,
+        },
+        {
+          model: Address,
+        },
+      ],
     });
     res.json(users);
   } catch (err) {

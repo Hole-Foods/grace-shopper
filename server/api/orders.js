@@ -11,6 +11,19 @@ const {
 const { isLoggedIn } = require('../utils');
 module.exports = router;
 
+// router.get('/:orderIds', isLoggedIn, async (req, res, next) => {
+//   try {
+//     const orderItems = await OrderItem.FindAll({});
+//     res.json(orderItems);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
+//TO FIX:
+//How do I get the order Ids to the backend query for the orderItems?
+//Current route is way too inefficient
+
 const adjustStock = async (id, qty) => {
   const donut = await Donut.findByPk(id);
   // if (donut.qty < qty) {
@@ -56,7 +69,7 @@ router.put('/', isLoggedIn, async (req, res, next) => {
       const order = await Order.create();
       await order.setUser(user);
       await order.setAddress(address);
-      //This needs to happen for the user
+      await user.setAddress(address);
 
       const orderItems = await Promise.all(
         cartItems.map(async item => {
