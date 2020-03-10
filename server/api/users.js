@@ -30,7 +30,10 @@ router.get('/:userId', async (req, res, next) => {
     const users = await User.findByPk(req.params.userId, {
       attributes: ['id', 'email'],
       include: [
-        { model: Order, include: [{ model: OrderItem }] },
+        {
+          model: Order,
+          include: [{ model: OrderItem, include: [{ model: Donut }] }],
+        },
         {
           model: Review,
         },
