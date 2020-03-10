@@ -7,6 +7,7 @@ import donuts from './donuts';
 import cart from './cart';
 import order from './order';
 import singleDonut from './donut';
+import users from './users';
 import reviews from './reviews';
 
 const reducer = combineReducers({
@@ -15,6 +16,7 @@ const reducer = combineReducers({
   singleDonut,
   cart,
   order,
+  users,
   reviews,
 });
 const middleware = composeWithDevTools(

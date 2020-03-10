@@ -30,6 +30,9 @@ const OrderCheckout = () => {
   }, []);
 
   //
+  if (!user.email) {
+    return <h1>4🍩4 Page Not Found</h1>;
+  }
 
   const divStyle = src => ({
     backgroundImage: `url(${src})`,
