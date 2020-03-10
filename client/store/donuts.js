@@ -47,7 +47,7 @@ export const deleteDonut = donutId => {
       await axios.delete(`/api/donuts/${donutId}`);
       dispatch(fetchDonuts());
     } catch (err) {
-      console.log('createDonut thunk error', err);
+      console.log('deleteDonut thunk error', err);
     }
   };
 };

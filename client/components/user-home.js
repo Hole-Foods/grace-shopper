@@ -18,8 +18,6 @@ const UserHome = () => {
     };
   });
 
-  console.log('USER', user, 'USER INFO', userInfo);
-
   useEffect(() => {
     dispatch(fetchUserInfo(user.id));
   }, []);

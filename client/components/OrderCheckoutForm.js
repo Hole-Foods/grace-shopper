@@ -47,7 +47,7 @@ const OrderCheckoutForm = () => {
   };
 
   // NEEDS VALIDATION
-  console.log(errors);
+  //console.log(errors);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

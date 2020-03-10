@@ -18,12 +18,8 @@ const AddDonutForm = () => {
     if (typeof data.price === 'string') data.price = parseInt(data.price);
     if (typeof data.qty === 'string') data.qty = parseInt(data.qty);
     if (data.description.length === 0) data.description = undefined;
-    console.log(data);
     dispatch(createDonut(data));
   };
-
-  // needs front end error display for bad data inputs
-  //console.log(errors);
 
   if (!user.isAdmin) return <h1>4🍩4 Page Not Found</h1>;
 
