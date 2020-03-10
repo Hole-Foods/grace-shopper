@@ -17,7 +17,7 @@ const AllUsers = props => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h4>{user.email}</h4>
       {!user.isAdmin && (
         <button className="btn btn-warning" onClick={promoteUser}>
