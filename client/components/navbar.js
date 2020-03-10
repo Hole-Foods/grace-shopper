@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
+const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
   <nav className="navbar navbar-light bg-light sticky-top">
     <h1>HOLE FOODS</h1>
     <div className="float-right">
@@ -29,6 +29,13 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           </Link>
         </>
       )}
+      {isAdmin && (
+        <>
+          <Link to="/admin" className="nav-item">
+            Admin Dash
+          </Link>
+        </>
+      )}
       <>
         <Link to="/donuts" className="nav-item">
           All Donuts
@@ -48,6 +55,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
+    isAdmin: state.user.isAdmin,
   };
 };
 

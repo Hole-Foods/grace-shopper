@@ -23,8 +23,18 @@ export const fetchSingleDonut = donutId => {
   return async dispatch => {
     try {
       const { data } = await axios.get(`/api/donuts/${donutId}`);
-      const action = setDonut(data);
-      dispatch(action);
+      dispatch(setDonut(data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const editSingleDonut = (donutId, changes) => {
+  return async dispatch => {
+    try {
+      await axios.put(`/api/donuts/${donutId}`, changes);
+      dispatch(fetchSingleDonut(donutId));
     } catch (err) {
       console.log(err);
     }

@@ -9,15 +9,13 @@ const {
   Address,
 } = require('../db/models');
 module.exports = router;
+const { isAdmin } = require('../utils');
 
-router.get('/', async (req, res, next) => {
+router.get('/', isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
-      attributes: ['id', 'email'],
-      include: [Review, CartItem], // FOR TESTING!
+      attributes: ['id', 'email', 'isAdmin'],
+      include: [Address, Order],
     });
     res.json(users);
   } catch (err) {
@@ -28,11 +26,11 @@ router.get('/', async (req, res, next) => {
 router.get('/:userId', async (req, res, next) => {
   try {
     const users = await User.findByPk(req.params.userId, {
-      attributes: ['id', 'email'],
+      attributes: ['id', 'email', 'isAdmin'],
       include: [
         {
           model: Order,
-          include: [{ model: OrderItem, include: [{ model: Donut }] }],
+          include: [Review, { model: OrderItem, include: [{ model: Donut }] }],
         },
         {
           model: Review,
@@ -43,6 +41,25 @@ router.get('/:userId', async (req, res, next) => {
       ],
     });
     res.json(users);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete('/:userId', isAdmin, async (req, res, next) => {
+  try {
+    await User.destroy({ where: { id: req.params.userId } });
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put('/:userId', isAdmin, async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId);
+    await user.update(req.body);
+    res.sendStatus(204);
   } catch (err) {
     next(err);
   }

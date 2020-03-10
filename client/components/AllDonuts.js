@@ -1,19 +1,18 @@
 import React, { useEffect } from 'react'; // don't forget to import useEffect
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'; // import redux hooks
-import { fetchDonuts } from '../store/donuts';
+import { fetchDonuts, deleteDonut } from '../store/donuts';
 import { addItemToCart } from '../store/cart';
 import styled from 'styled-components';
 import FadeIn from 'react-fade-in';
 
 const AllDonuts = () => {
-  // declare dispatch function - always when you need dispatch
   const dispatch = useDispatch();
 
-  // just like map state to props but assigning to a const variable
-  const donuts = useSelector(state => state.donuts);
+  const { donuts, user } = useSelector(state => {
+    return { donuts: state.donuts, user: state.user };
+  });
 
-  // just like component did mount
   useEffect(() => {
     dispatch(fetchDonuts());
   }, []);
@@ -22,8 +21,21 @@ const AllDonuts = () => {
     dispatch(addItemToCart({ donutId, qty: 1 }));
   };
 
+  const removeDonut = donutId => {
+    dispatch(deleteDonut(donutId));
+  };
+
   return (
     <div className="container">
+      <div className="row">
+        <div className="col-md">
+          {user.isAdmin && (
+            <Link to="/admin/add-donut">
+              <button className="btn btn-primary">Add New Donut</button>
+            </Link>
+          )}
+        </div>
+      </div>
       <div className="row">
         {donuts.map(donut => (
           <DefaultDiv key={donut.id}>
@@ -49,6 +61,14 @@ const AllDonuts = () => {
                   >
                     Add to cart
                   </button>
+                  {user.isAdmin && (
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => removeDonut(donut.id)}
+                    >
+                      Delete
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
