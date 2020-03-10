@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SingleReview from './SingleReview';
+import { fetchDonutReviews } from '../store/reviews';
+import { useSelector, useDispatch } from 'react-redux';
 
 const ReviewList = props => {
-  const { reviews } = props;
+  const reviews = useSelector(state => state.reviews);
+  const dispatch = useDispatch();
 
-  if (!props.reviews || !props.reviews.length) {
-    return <div>No reviews for this donut yet. Write one!</div>;
+  // just like component did mount
+  useEffect(() => {
+    dispatch(fetchDonutReviews(props.donutId));
+  }, []);
+
+  if (!reviews || !reviews.length) {
+    return <div className="mb-3">No reviews for this donut yet.</div>;
   }
 
   return (
-    <div>
-      <SingleReview reviews={reviews} />;
+    <div className="row my-3">
+      {reviews.map(review => (
+        <SingleReview key={review.id} review={review} />
+      ))}
     </div>
   );
 };

@@ -54,7 +54,7 @@ router.put('/', isLoggedIn, async (req, res, next) => {
         ],
       });
       // add check if there are cart items
-      //console.log(Object.keys(order.__proto__));
+      // console.log(Object.keys(order.__proto__));
 
       if (req.body.token) {
         const total = cartItems.reduce((acc, item) => {

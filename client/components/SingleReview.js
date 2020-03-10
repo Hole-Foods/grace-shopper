@@ -2,28 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 
 const SingleReview = props => {
-  const { reviews } = props;
+  const { review } = props;
 
   return (
-    <div className="row">
-      {reviews.map(review => (
-        <DefaultDiv key={review.id}>
-          <div className="col-sm">
-            <div className="card">
-              <div className="card-body">
-                <p>
-                  <small className="text-muted">Rating: {review.rating}</small>
-                </p>
-                <p className="card-text">{review.content}</p>
-                <p>
-                  <small className="text-muted">Submitted by User</small>
-                </p>
-              </div>
-            </div>
+    <DefaultDiv>
+      <div className="col-sm">
+        <div className="card">
+          <div className="card-body">
+            <p>
+              <small className="text-muted">Rating: {review.rating}</small>
+            </p>
+            <p className="card-text">{review.content}</p>
+            <p>
+              <small className="text-muted">
+                Submitted on {new Date(review.createdAt).toString()}
+              </small>
+            </p>
           </div>
-        </DefaultDiv>
-      ))}
-    </div>
+        </div>
+      </div>
+    </DefaultDiv>
   );
 };
 
