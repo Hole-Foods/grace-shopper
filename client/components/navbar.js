@@ -1,46 +1,55 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
+import styled from 'styled-components';
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
-  <nav className="navbar navbar-light bg-light sticky-top">
-    <h1>HOLE FOODS</h1>
-    <div className="float-right">
-      {isLoggedIn ? (
+const Navbar = ({ handleClick, isLoggedIn }) => {
+  const cart = useSelector(state => state.cart);
+  return (
+    <nav className="navbar navbar-light bg-light sticky-top">
+      <img src="images/logo.gif" height="75px" width="78px" />
+      <Header>HOLE FOODS</Header>
+      <div className="float-right">
+        {isLoggedIn ? (
+          <>
+            {/* The navbar will show these links after you log in */}
+            <Link to="/home" className="nav-item">
+              Home
+            </Link>
+            <a href="#" onClick={handleClick} className="nav-item">
+              Logout
+            </a>
+          </>
+        ) : (
+          <>
+            {/* The navbar will show these links before you log in */}
+            <Link to="/login" className="nav-item">
+              Login
+            </Link>
+            <Link to="/signup" className="nav-item">
+              Sign Up
+            </Link>
+          </>
+        )}
         <>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home" className="nav-item">
-            Home
+          <Link to="/donuts" className="nav-item">
+            All Donuts
           </Link>
-          <a href="#" onClick={handleClick} className="nav-item">
-            Logout
-          </a>
-        </>
-      ) : (
-        <>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login" className="nav-item">
-            Login
-          </Link>
-          <Link to="/signup" className="nav-item">
-            Sign Up
+          <Link to="/cart" className='"nav-item"'>
+            Cart -{' '}
+            {cart.reduce((acc, item) => {
+              return acc + item.qty;
+            }, 0)}{' '}
+            items
           </Link>
         </>
-      )}
-      <>
-        <Link to="/donuts" className="nav-item">
-          All Donuts
-        </Link>
-        <Link to="/cart" className='"nav-item"'>
-          Cart
-        </Link>
-      </>
-    </div>
-    <hr />
-  </nav>
-);
+      </div>
+      <hr />
+    </nav>
+  );
+};
 
 /**
  * CONTAINER
@@ -68,3 +77,7 @@ Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
 };
+
+const Header = styled.h1`
+  margin-left: 15px;
+`;
