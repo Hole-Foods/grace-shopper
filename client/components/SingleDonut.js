@@ -18,7 +18,6 @@ const SingleDonut = props => {
   // just like component did mount
   useEffect(() => {
     dispatch(fetchSingleDonut(props.match.params.donutId));
-    // dispatch(fetchDonutReviews(props.match.params.donutId));
   }, []);
 
   const addToCart = evt => {

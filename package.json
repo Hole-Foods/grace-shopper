@@ -41,6 +41,8 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
+    "@stripe/react-stripe-js": "^1.0.3",
+    "@stripe/stripe-js": "^1.0.2",
     "axios": "^0.19.0",
     "chance": "^1.1.4",
     "compression": "^1.7.3",
@@ -65,7 +67,7 @@
     "redux-thunk": "^2.3.0",
     "sequelize": "^5.15.1",
     "socket.io": "^2.2.0",
-    "stripe": "^8.26.0",
+    "stripe": "^8.29.0",
     "styled-components": "^5.0.1"
   },
   "devDependencies": {
