@@ -9,8 +9,8 @@ const {
   CartItem,
 } = require('../db/models');
 const { isLoggedIn } = require('../utils');
-const { STRIPE_KEY } = require('../../secrets');
-const stripe = require('stripe')(`${STRIPE_KEY}`);
+const process = require('../../secrets');
+const stripe = require('stripe')(`${process.env.STRIPE_KEY}`);
 module.exports = router;
 
 const adjustStock = async (id, qty) => {
