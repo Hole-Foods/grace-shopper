@@ -6,19 +6,6 @@ import styled from 'styled-components';
 const SingleOrder = props => {
   const { orders } = props;
 
-  // const dispatch = useDispatch();
-
-  // const { donuts } = useSelector(state => {
-  //   return {
-  //     donuts: state.donuts,
-  //   };
-  // });
-
-  // useEffect(() => {
-  //   dispatch(fetchDonuts());
-  // }, []);
-  console.log('ORDERS: ', orders);
-
   return (
     <div className="row">
       {orders.map(order => (
@@ -31,7 +18,6 @@ const SingleOrder = props => {
                 </p>
                 <div className="card-text">
                   {order.orderItems.map(item => {
-                    console.log('ITEM: ', item);
                     return (
                       <ul key={item.id}>
                         <li>Donut: {item.donut.name}</li>
