@@ -4,6 +4,7 @@ import { fetchUserInfo } from '../store/userInfo';
 import SingleReview from './SingleReview';
 import OrderList from './OrderList';
 import UserUpdateForm from './UserUpdateForm';
+import { Accordion, Card, Button } from 'react-bootstrap';
 
 /**
  * COMPONENT
@@ -22,26 +23,164 @@ const UserHome = () => {
     dispatch(fetchUserInfo(user.id));
   }, []);
 
+  //   return (
+  //     <div>
+  //       <h3>Welcome, {user.email}</h3>
+  //       <Accordion>
+  //         <Card>
+  //           <Card.Header>
+  //             <Accordion.Toggle as={Button} variant="link" eventKey="0">
+  //               See Your Reviews
+  //             </Accordion.Toggle>
+  //           </Card.Header>
+  //           <Accordion.Collapse eventKey="0">
+  //             <Card.Body>
+  //               {userInfo.reviews ? (
+  //                 <div>
+  //                   {userInfo.reviews.map(review => (
+  //                     <SingleReview key={review.id} review={review} />
+  //                   ))}
+  //                 </div>
+  //               ) : (
+  //                 <p>No reviews.</p>
+  //               )}
+  //             </Card.Body>
+  //           </Accordion.Collapse>
+  //           <Card.Header>
+  //             <Accordion.Toggle as={Button} variant="link" eventKey="1">
+  //               See Your Orders
+  //             </Accordion.Toggle>
+  //           </Card.Header>
+  //           <Accordion.Collapse eventKey="1">
+  //             <Card.Body>
+  //               {userInfo.orders ? (
+  //                 <OrderList orders={userInfo.orders} />
+  //               ) : (
+  //                 <h4>No Orders</h4>
+  //               )}
+  //             </Card.Body>
+  //           </Accordion.Collapse>
+  //           <Card.Header>
+  //             <Accordion.Toggle as={Button} variant="link" eventKey="2">
+  //               Edit Shipping Information
+  //             </Accordion.Toggle>
+  //           </Card.Header>
+  //           <Accordion.Collapse eventKey="2">
+  //             <Card.Body>
+  //               {userInfo.address ? (
+  //                 <UserUpdateForm address={userInfo.address} />
+  //               ) : null}
+  //             </Card.Body>
+  //           </Accordion.Collapse>
+  //         </Card>
+  //       </Accordion>
+  //     </div>
+  //   );
+  // };
+
+  //WITHOUT REACT-BOOTSTRAP-- NON-FUNCTIONAL
   return (
     <div>
       <h3>Welcome, {user.email}</h3>
-      <h3>Reviews: </h3>
-      {userInfo.reviews ? (
-        <div>
-          {userInfo.reviews.map(review => (
-            <SingleReview key={review.id} review={review} />
-          ))}
+      <div className="accordion" id="accordionExample">
+        <div className="card">
+          <div className="card-header" id="headingOne">
+            <h5 className="mb-0">
+              <button
+                className="btn"
+                type="button"
+                data-toggle="collapse show"
+                data-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                Reviews
+              </button>
+            </h5>
+          </div>
+
+          <div
+            id="collapseOne"
+            className="collapse show"
+            aria-labelledby="headingOne"
+            data-parent="#accordionExample"
+          >
+            <div className="card-body">
+              {userInfo.reviews ? (
+                <div>
+                  {userInfo.reviews.map(review => (
+                    <SingleReview key={review.id} review={review} />
+                  ))}
+                </div>
+              ) : (
+                <p>No reviews.</p>
+              )}
+            </div>
+          </div>
         </div>
-      ) : (
-        <p>No reviews yet.</p>
-      )}
-      <h3>Order History: </h3>
-      {userInfo.orders ? (
-        <OrderList orders={userInfo.orders} />
-      ) : (
-        <h4>No Orders</h4>
-      )}
-      {userInfo.address ? <UserUpdateForm address={userInfo.address} /> : null}
+
+        <div className="card">
+          <div className="card-header" id="headingTwo">
+            <h5 className="mb-0">
+              <button
+                className="btn"
+                type="button"
+                data-toggle="collapse show"
+                data-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                Order History
+              </button>
+            </h5>
+          </div>
+
+          <div
+            id="collapseTwo"
+            className="collapse show"
+            aria-labelledby="headingTwo"
+            data-parent="#accordionExample"
+          >
+            <div className="card-body">
+              {userInfo.orders ? (
+                <OrderList orders={userInfo.orders} />
+              ) : (
+                <h4>No Orders</h4>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="card">
+          <div className="card-header" id="headingThree">
+            <h5 className="mb-0">
+              <button
+                className="btn"
+                type="button"
+                data-toggle="collapse show"
+                data-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                Edit Shipping Information
+              </button>
+            </h5>
+          </div>
+
+          <div
+            id="collapseThree"
+            className="collapse show"
+            aria-labelledby="headingThree"
+            data-parent="#accordionExample"
+          >
+            <div className="card-body">
+              {userInfo.address ? (
+                <UserUpdateForm address={userInfo.address} />
+              ) : null}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
