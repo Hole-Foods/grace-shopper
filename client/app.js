@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import GlobalStyle from './styles/Global';
-import { Navbar, AllDonuts } from './components';
+import { Navbar } from './components';
 import Routes from './routes';
 
 const App = () => {
