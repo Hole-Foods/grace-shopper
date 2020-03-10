@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { logout } from '../store';
 import styled from 'styled-components';
 
-const Navbar = ({ handleClick, isLoggedIn }) => {
+const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
   const cart = useSelector(state => state.cart);
   return (
     <nav className="navbar navbar-light bg-light sticky-top">
@@ -38,25 +38,31 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
             All Donuts
           </Link>
           <Link to="/cart" className='"nav-item"'>
-            Cart -{' '}
+            Cart - &nbsp;
             {cart.reduce((acc, item) => {
               return acc + item.qty;
-            }, 0)}{' '}
-            items
+            }, 0)}
           </Link>
         </>
+        {isAdmin && (
+          <>
+            <Link to="/admin" className="nav-item">
+              Admin Dash
+            </Link>
+          </>
+        )}
       </div>
       <hr />
     </nav>
   );
 };
-
 /**
  * CONTAINER
  */
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
+    isAdmin: state.user.isAdmin,
   };
 };
 

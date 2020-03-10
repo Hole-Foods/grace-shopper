@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSingleDonut, fetchDonutReviews } from '../store/donut';
+import {
+  fetchSingleDonut,
+  editSingleDonut,
+  fetchDonutReviews,
+} from '../store/donut';
 import { addItemToCart } from '../store/cart';
 import ReviewList from './ReviewList';
 import AddReviewForm from './AddReviewForm';
@@ -12,8 +16,13 @@ const SingleDonut = props => {
   const dispatch = useDispatch();
 
   // just like map state to props but assigning to a const variable
-  const donut = useSelector(state => state.singleDonut);
-  const reviews = useSelector(state => state.reviews);
+  const { donut, user, reviews } = useSelector(state => {
+    return {
+      donut: state.singleDonut,
+      user: state.user,
+      reviews: state.reviews,
+    };
+  });
 
   // just like component did mount
   useEffect(() => {
@@ -28,12 +37,16 @@ const SingleDonut = props => {
     }
   };
 
+  const editDescription = evt => {
+    evt.preventDefault();
+    dispatch(
+      editSingleDonut(donut.id, { description: evt.target.description.value })
+    );
+  };
+
   if (!donut) {
     return <div>4🍩4 no donut found</div>;
   }
-
-  // NULL REF ERROR
-  // console.log('donut reviews: ', donut.reviews && donut.reviews.length);
 
   return (
     <>
@@ -64,6 +77,17 @@ const SingleDonut = props => {
                   </small>
                 </p>
                 <p className="card-text">{donut.description}</p>
+                {user.isAdmin && (
+                  <form id="edit-desc" onSubmit={editDescription}>
+                    <textarea
+                      name="description"
+                      placeholder="edit description"
+                    />
+                    <button type="submit" className="btn btn-primary">
+                      Save Edits
+                    </button>
+                  </form>
+                )}
                 <form id="add-to-cart" value="1" onSubmit={addToCart}>
                   <input name="qty" type="number" min="1" max={donut.qty} />
                   <div>
