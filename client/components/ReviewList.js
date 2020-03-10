@@ -13,7 +13,7 @@ const ReviewList = props => {
   }, []);
 
   if (!reviews || !reviews.length) {
-    return <div className="mb-3">No reviews for this donut yet.</div>;
+    return <div className="mb-3">No reviews yet.</div>;
   }
 
   return (
