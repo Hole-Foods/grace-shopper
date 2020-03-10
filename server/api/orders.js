@@ -9,6 +9,8 @@ const {
   CartItem,
 } = require('../db/models');
 const { isLoggedIn } = require('../utils');
+const { STRIPE_KEY } = require('../../secrets');
+const stripe = require('stripe')(`${STRIPE_KEY}`);
 module.exports = router;
 
 const adjustStock = async (id, qty) => {
@@ -33,12 +35,14 @@ router.put('/', isLoggedIn, async (req, res, next) => {
           city: req.body.city,
           state: req.body.state,
           zip: req.body.zip,
-          country: req.body.country,
         },
       });
 
       const user = await User.findByPk(req.user.id);
 
+      if (!user.addressId) {
+        await user.setAddress(address);
+      }
       //console.log(Object.keys(user.__proto__));
 
       const cartItems = await user.getCartItems({
@@ -52,9 +56,25 @@ router.put('/', isLoggedIn, async (req, res, next) => {
       // add check if there are cart items
       //console.log(Object.keys(order.__proto__));
 
+      if (req.body.token) {
+        const total = cartItems.reduce((acc, item) => {
+          return acc + item.donut.price * item.qty * 100;
+        }, 0);
+
+        const charge = await stripe.charges.create({
+          amount: total,
+          currency: 'usd',
+          description: 'Hole Foods',
+          source: req.body.token.id,
+        });
+
+        console.log('CHARGE', charge);
+      }
+
       const order = await Order.create();
       await order.setUser(user);
       await order.setAddress(address);
+      // get user address check added if not, set it
 
       const orderItems = await Promise.all(
         cartItems.map(async item => {
