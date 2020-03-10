@@ -46,9 +46,6 @@ const OrderCheckoutForm = () => {
     dispatch(submitOrder(data));
   };
 
-  // NEEDS VALIDATION
-  //console.log(errors);
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-group col-md-12">
