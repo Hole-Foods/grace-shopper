@@ -34,7 +34,6 @@ export const fetchDonutReviews = donutId => {
 export const addNewReview = review => async dispatch => {
   try {
     const { data } = await axios.post('/api/reviews', review);
-    console.log('DATA!', data);
     dispatch(addReview(data));
   } catch (err) {
     console.log('addNewReview err', err);
