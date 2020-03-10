@@ -22,8 +22,17 @@ const OrderCheckoutForm = () => {
       return;
     }
 
+    const billingInfo = {
+      name: `${data.firstName} ${data.lastName}`,
+      address_line1: `${data.address1}`,
+      address_line2: `${data.address2}`,
+      address_city: `${data.city}`,
+      address_state: `${data.state}`,
+      address_zip: `${data.zip}`,
+    };
+
     const card = elements.getElement(CardElement);
-    const result = await stripe.createToken(card);
+    const result = await stripe.createToken(card, billingInfo);
 
     if (result.error) {
       // Show error to your customer.
@@ -31,7 +40,7 @@ const OrderCheckoutForm = () => {
     } else {
       // Send the token to your server.
       // This function does not exist yet; we will define it in the next step.
-      data.token = result.token.id;
+      data.token = result.token;
     }
 
     dispatch(submitOrder(data));

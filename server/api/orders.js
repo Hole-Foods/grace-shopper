@@ -62,8 +62,9 @@ router.put('/', isLoggedIn, async (req, res, next) => {
         const charge = await stripe.charges.create({
           amount: total,
           currency: 'usd',
+          // customer: req.user.id, //
           description: 'Hole Foods Bill',
-          source: req.body.token,
+          source: req.body.token.id,
         });
 
         console.log('CHARGE', charge);
