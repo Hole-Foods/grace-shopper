@@ -35,12 +35,14 @@ router.put('/', isLoggedIn, async (req, res, next) => {
           city: req.body.city,
           state: req.body.state,
           zip: req.body.zip,
-          country: req.body.country,
         },
       });
 
       const user = await User.findByPk(req.user.id);
 
+      if (!user.addressId) {
+        await user.setAddress(address);
+      }
       //console.log(Object.keys(user.__proto__));
 
       const cartItems = await user.getCartItems({
@@ -62,8 +64,7 @@ router.put('/', isLoggedIn, async (req, res, next) => {
         const charge = await stripe.charges.create({
           amount: total,
           currency: 'usd',
-          // customer: req.user.id, //
-          description: 'Hole Foods Bill',
+          description: 'Hole Foods',
           source: req.body.token.id,
         });
 

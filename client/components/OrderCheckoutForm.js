@@ -60,6 +60,9 @@ const OrderCheckoutForm = () => {
           name="firstName"
           ref={register({ required: true })}
         />
+        {errors.firstName && (
+          <span className="alert-warning">First name is required</span>
+        )}
       </div>
       <div className="form-group col-md-12">
         <label>Last Name</label>
@@ -68,8 +71,11 @@ const OrderCheckoutForm = () => {
           className="form-control"
           placeholder="Last Name"
           name="lastName"
-          ref={register}
+          ref={register({ required: true })}
         />
+        {errors.lastName && (
+          <span className="alert-warning">Last name is required</span>
+        )}
       </div>
 
       <div className="form-group col-md-12">
@@ -81,6 +87,9 @@ const OrderCheckoutForm = () => {
           name="address1"
           ref={register({ required: true })}
         />
+        {errors.address1 && (
+          <span className="alert-warning">Address is required</span>
+        )}
       </div>
       <div className="form-group col-md-12">
         <label>Address 2</label>
@@ -102,6 +111,7 @@ const OrderCheckoutForm = () => {
           name="city"
           ref={register({ required: true })}
         />
+        {errors.city && <span className="alert-warning">City is required</span>}
       </div>
       <div className="form-group col-md-12">
         <label>State</label>
@@ -114,6 +124,9 @@ const OrderCheckoutForm = () => {
             required: true,
           })}
         />
+        {errors.state && (
+          <span className="alert-warning">State is required</span>
+        )}
       </div>
       <div className="form-group col-md-12">
         <label>Zip</label>
@@ -127,17 +140,9 @@ const OrderCheckoutForm = () => {
             pattern: /^\d{5}(-\d{4})?$/i,
           })}
         />
-      </div>
-
-      <div className="form-group col-md-12">
-        <label>Country</label>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Country"
-          name="country"
-          ref={register}
-        />
+        {errors.zip && (
+          <span className="alert-warning">Zip code is required</span>
+        )}
       </div>
       <div className="form-group col-md-12">
         <OrderCheckoutCardSection />
