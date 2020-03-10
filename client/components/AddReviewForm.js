@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 const AddReviewForm = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
-  // console.log('AddRevieswForm errors: ', errors);
+  // console.log('AddReviewForm errors: ', errors);
 
   const { donut, user } = useSelector(state => {
     return {

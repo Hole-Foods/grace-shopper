@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSingleDonut } from '../store/donut';
+import { fetchSingleDonut, fetchDonutReviews } from '../store/donut';
 import { addItemToCart } from '../store/cart';
 import ReviewList from './ReviewList';
 import AddReviewForm from './AddReviewForm';
@@ -8,14 +8,17 @@ import FadeIn from 'react-fade-in';
 
 const SingleDonut = props => {
   // declare dispatch function - always when you need dispatch
+
   const dispatch = useDispatch();
 
   // just like map state to props but assigning to a const variable
   const donut = useSelector(state => state.singleDonut);
+  const reviews = useSelector(state => state.reviews);
 
   // just like component did mount
   useEffect(() => {
     dispatch(fetchSingleDonut(props.match.params.donutId));
+    // dispatch(fetchDonutReviews(props.match.params.donutId));
   }, []);
 
   const addToCart = evt => {
@@ -78,10 +81,10 @@ const SingleDonut = props => {
         <h2 className="text-primary">
           Reviews &nbsp;
           <span className="badge badge-light">
-            {donut.reviews && donut.reviews.length ? donut.reviews.length : '0'}{' '}
+            {reviews && reviews.length ? reviews.length : '0'}
           </span>
         </h2>
-        <ReviewList donutId={donut.id} />
+        {donut.reviews && donut.id && <ReviewList donutId={donut.id} />}
       </div>
       <div className="container">
         <AddReviewForm />

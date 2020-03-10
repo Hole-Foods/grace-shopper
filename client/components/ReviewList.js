@@ -1,24 +1,20 @@
 import React, { useEffect } from 'react';
 import SingleReview from './SingleReview';
-import { useDispatch, useSelector } from 'react-redux';
 import { fetchDonutReviews } from '../store/reviews';
+import { useSelector, useDispatch } from 'react-redux';
 
 const ReviewList = props => {
+  const reviews = useSelector(state => state.reviews);
   const dispatch = useDispatch();
 
-  const reviews = useSelector(state => state.reviews);
-
-  const { donutId } = props;
-
+  // just like component did mount
   useEffect(() => {
-    dispatch(fetchDonutReviews(donutId));
+    dispatch(fetchDonutReviews(props.donutId));
   }, []);
 
   if (!reviews || !reviews.length) {
     return <div className="mb-3">No reviews for this donut yet.</div>;
   }
-
-  if (!donutId) return <div>loading...</div>;
 
   return (
     <div className="row my-3">

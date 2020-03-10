@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const { User, Donut, Review } = require('../db/models');
+const { Review } = require('../db/models');
 const { isLoggedIn } = require('../utils');
 module.exports = router;
 
-// all reviews
+// get all reviews
 router.get('/', async (req, res, next) => {
   try {
     const reviews = await Review.findAll();
@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// all reviews for specific donut
+// get all reviews for specific donut
 router.get('/donuts/:donutId', async (req, res, next) => {
   try {
     const review = await Review.findAll({
@@ -25,7 +25,7 @@ router.get('/donuts/:donutId', async (req, res, next) => {
   }
 });
 
-// all reviews for specific user
+// get all reviews for specific user
 router.get('/users/:userId', async (req, res, next) => {
   try {
     const review = await Review.findAll({
@@ -37,14 +37,11 @@ router.get('/users/:userId', async (req, res, next) => {
   }
 });
 
+// add review
 router.post('/', isLoggedIn, async (req, res, next) => {
   try {
-    if (req.user) {
-      const review = await Review.create(req.body);
-      res.json(review);
-    } else if (!req.user) {
-      console.log('Log in to add a review');
-    }
+    const review = await Review.create(req.body);
+    res.json(review);
   } catch (err) {
     next(err);
   }

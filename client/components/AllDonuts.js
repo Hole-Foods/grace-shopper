@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'; // import redux hooks
 import { fetchDonuts } from '../store/donuts';
 import { addItemToCart } from '../store/cart';
-import Pagination from './Pagination';
 import styled from 'styled-components';
 import FadeIn from 'react-fade-in';
 
@@ -56,7 +55,6 @@ const AllDonuts = () => {
           </DefaultDiv>
         ))}
       </div>
-      <Pagination />
     </div>
   );
 };

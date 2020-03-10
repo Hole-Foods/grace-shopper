@@ -14,7 +14,9 @@ const SingleReview = props => {
             </p>
             <p className="card-text">{review.content}</p>
             <p>
-              <small className="text-muted">Submitted by User</small>
+              <small className="text-muted">
+                Submitted on {new Date(review.createdAt).toString()}
+              </small>
             </p>
           </div>
         </div>

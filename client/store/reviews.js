@@ -23,10 +23,7 @@ const addReview = review => {
 export const fetchDonutReviews = donutId => {
   return async dispatch => {
     try {
-      console.log('DONUT ID!!!!!!!', donutId);
-
       const { data } = await axios.get(`/api/reviews/donuts/${donutId}`);
-      console.log('DATA!!!!!!!', data);
       dispatch(setReviews(data));
     } catch (err) {
       console.log('fetchReviews error', err);
@@ -37,6 +34,7 @@ export const fetchDonutReviews = donutId => {
 export const addNewReview = review => async dispatch => {
   try {
     const { data } = await axios.post('/api/reviews', review);
+    console.log('DATA!', data);
     dispatch(addReview(data));
   } catch (err) {
     console.log('addNewReview err', err);
