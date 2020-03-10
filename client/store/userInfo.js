@@ -13,10 +13,10 @@ const updateUserInfo = update => ({
   update,
 });
 
-export const fetchUserInfo = userId => {
+export const fetchUserInfo = () => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`/api/users/${userId}`);
+      const { data } = await axios.get(`/api/users/home`);
       const action = setUserInfo(data);
       dispatch(action);
     } catch (err) {
@@ -45,7 +45,7 @@ export default function(state = {}, action) {
     case SET_USER_INFO:
       return action.userInfo;
     case UPDATE_USER_INFO:
-      return { ...state, ...action.info };
+      return { ...state, ...action.update };
     default:
       return state;
   }

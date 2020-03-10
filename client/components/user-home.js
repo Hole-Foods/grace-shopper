@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'; // import redux hooks
 import { fetchUserInfo } from '../store/userInfo';
-import ReviewList from './ReviewList';
+import SingleReview from './SingleReview';
 import OrderList from './OrderList';
 import UserUpdateForm from './UserUpdateForm';
 
@@ -18,6 +18,8 @@ const UserHome = () => {
     };
   });
 
+  console.log('USER', user, 'USER INFO', userInfo);
+
   useEffect(() => {
     dispatch(fetchUserInfo(user.id));
   }, []);
@@ -27,9 +29,13 @@ const UserHome = () => {
       <h3>Welcome, {user.email}</h3>
       <h3>Reviews: </h3>
       {userInfo.reviews ? (
-        <ReviewList reviews={userInfo.reviews} />
+        <div>
+          {userInfo.reviews.map(review => (
+            <SingleReview key={review.id} review={review} />
+          ))}
+        </div>
       ) : (
-        <h4>No Reviews</h4>
+        <p>No reviews yet.</p>
       )}
       <h3>Order History: </h3>
       {userInfo.orders ? (

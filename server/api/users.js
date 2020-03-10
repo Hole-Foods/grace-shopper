@@ -3,13 +3,12 @@ const {
   User,
   Review,
   Donut,
-  CartItem,
   Order,
   OrderItem,
   Address,
 } = require('../db/models');
 module.exports = router;
-const { isAdmin } = require('../utils');
+const { isAdmin, isLoggedIn } = require('../utils');
 
 router.get('/', isAdmin, async (req, res, next) => {
   try {
@@ -23,21 +22,17 @@ router.get('/', isAdmin, async (req, res, next) => {
   }
 });
 
-router.get('/:userId', async (req, res, next) => {
+router.get('/home', isLoggedIn, async (req, res, next) => {
   try {
-    const users = await User.findByPk(req.params.userId, {
+    const users = await User.findByPk(req.user.id, {
       attributes: ['id', 'email', 'isAdmin'],
       include: [
         {
           model: Order,
-          include: [Review, { model: OrderItem, include: [{ model: Donut }] }],
+          include: [{ model: OrderItem, include: [{ model: Donut }] }],
         },
-        {
-          model: Review,
-        },
-        {
-          model: Address,
-        },
+        { model: Review },
+        { model: Address },
       ],
     });
     res.json(users);

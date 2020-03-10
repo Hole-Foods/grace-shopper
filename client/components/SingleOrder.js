@@ -29,7 +29,7 @@ const SingleOrder = props => {
                 <p>
                   <small className="text-muted">Order Number: {order.id}</small>
                 </p>
-                <p className="card-text">
+                <div className="card-text">
                   {order.orderItems.map(item => {
                     console.log('ITEM: ', item);
                     return (
@@ -40,7 +40,7 @@ const SingleOrder = props => {
                       </ul>
                     );
                   })}
-                </p>
+                </div>
                 <p>
                   <small className="text-muted">Submitted by User</small>
                 </p>

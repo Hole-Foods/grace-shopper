@@ -10,7 +10,7 @@ const OrderList = props => {
 
   return (
     <div>
-      <SingleOrder orders={orders} />;
+      <SingleOrder orders={orders} />
     </div>
   );
 };
