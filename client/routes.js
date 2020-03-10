@@ -7,6 +7,7 @@ import {
   Signup,
   UserHome,
   AllDonuts,
+  AllUsers,
   Cart,
   OrderCheckout,
   OrderConfirmation,
@@ -32,6 +33,7 @@ class Routes extends Component {
         {/* <Route path="/donut/:donutId" component={SingleDonut} /> */}
         <Route path="/donuts/:donutId" component={SingleDonut} />
         <Route path="/admin/add-donut" component={AddDonutForm} />
+        <Route path="/admin/users" component={AllUsers} />
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={OrderCheckout} />
         <Route path="/confirmation" component={OrderConfirmation} />
@@ -44,9 +46,6 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
           </Switch>
         )}
-        {/* <Route path="/admin/edit-donut" component={EditInventoryForm} />
-            <Route path="/admin/all-orders" component={AllOrders} />
-            <Route path="/admin/all-users" component={AllUsers} /> */}
         {/* Displays our Login component as a fallback */}
         <Route
           path="/:doesnotexist"

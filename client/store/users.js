@@ -16,9 +16,31 @@ export const fetchUsers = () => async dispatch => {
   }
 };
 
-const initUsers = [];
+export const editUser = (userId, changes) => {
+  return async dispatch => {
+    try {
+      await axios.put(`/api/users/${userId}`, changes);
+      dispatch(fetchUsers());
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 
-export default function(state = initUsers, action) {
+export const deleteUser = userId => {
+  return async dispatch => {
+    try {
+      await axios.delete(`/api/users/${userId}`);
+      dispatch(fetchUsers());
+    } catch (err) {
+      console.log('deleteUser thunk error', err);
+    }
+  };
+};
+
+const init = [];
+
+export default function(state = init, action) {
   switch (action.type) {
     case GET_USERS:
       return action.users;
