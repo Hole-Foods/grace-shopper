@@ -30,3 +30,12 @@ router.get('/:donutId', async (req, res, next) => {
     next(err);
   }
 });
+
+router.delete('/:donutId', async (req, res, next) => {
+  try {
+    await Donut.destroy({ where: { id: req.params.donutId } });
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});

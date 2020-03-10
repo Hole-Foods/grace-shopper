@@ -41,6 +41,17 @@ export const createDonut = donut => {
   };
 };
 
+export const deleteDonut = donutId => {
+  return async dispatch => {
+    try {
+      await axios.delete(`/api/donuts/${donutId}`);
+      dispatch(fetchDonuts());
+    } catch (err) {
+      console.log('createDonut thunk error', err);
+    }
+  };
+};
+
 //reducers
 const initialState = [];
 

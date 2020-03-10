@@ -22,7 +22,7 @@ const AddDonutForm = () => {
     dispatch(createDonut(data));
   };
 
-  // later
+  // needs front end error display for bad data inputs
   //console.log(errors);
 
   if (!user.isAdmin) return <h1>4🍩4 Page Not Found</h1>;
