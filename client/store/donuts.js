@@ -1,4 +1,5 @@
 import axios from 'axios';
+import history from '../history';
 
 // action-types
 const SET_DONUTS = 'SET_DONUTS';
@@ -35,6 +36,7 @@ export const createDonut = donut => {
     try {
       const response = await axios.post('/api/donuts', donut);
       dispatch(addDonut(response.data));
+      history.push({ pathname: '/donuts' });
     } catch (err) {
       console.log('createDonut thunk error', err);
     }
@@ -47,7 +49,7 @@ export const deleteDonut = donutId => {
       await axios.delete(`/api/donuts/${donutId}`);
       dispatch(fetchDonuts());
     } catch (err) {
-      console.log('createDonut thunk error', err);
+      console.log('deleteDonut thunk error', err);
     }
   };
 };

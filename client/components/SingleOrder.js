@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux'; // import redux hooks
-import { fetchDonuts } from '../store/donuts';
+import React from 'react';
 import styled from 'styled-components';
 
 const SingleOrder = props => {

@@ -44,7 +44,6 @@ router.put('/', isLoggedIn, async (req, res, next) => {
       if (!user.addressId) {
         await user.setAddress(address);
       }
-      //console.log(Object.keys(user.__proto__));
 
       const cartItems = await user.getCartItems({
         include: [
@@ -54,8 +53,6 @@ router.put('/', isLoggedIn, async (req, res, next) => {
           },
         ],
       });
-      // add check if there are cart items
-      // console.log(Object.keys(order.__proto__));
 
       if (req.body.token) {
         const total = cartItems.reduce((acc, item) => {
@@ -68,8 +65,6 @@ router.put('/', isLoggedIn, async (req, res, next) => {
           description: 'Hole Foods',
           source: req.body.token.id,
         });
-
-        console.log('CHARGE', charge);
       }
 
       const order = await Order.create();

@@ -85,7 +85,6 @@ router.delete('/:donutId', async (req, res, next) => {
       const updatedCart = guestCart.filter(
         item => item.donutId != req.params.donutId
       );
-      console.log(updatedCart);
       req.session.cart = updatedCart;
     }
     res.sendStatus(204);

@@ -5,14 +5,6 @@ import FadeIn from 'react-fade-in';
 const OrderConfirmation = () => {
   const { order } = useSelector(state => state.order);
 
-  const divStyle = src => ({
-    backgroundImage: `url(${src})`,
-    height: '95px',
-    width: '100%',
-    backgroundSize: 'cover',
-    overflow: 'none',
-  });
-
   return (
     <>
       <FadeIn transitionDuration="1000">
@@ -42,17 +34,19 @@ const OrderConfirmation = () => {
               <br />
               <div className="row">
                 <div className="col-md-2" />
-                <div className="col-md-6">name</div>
-                <div className="col-md-2">qty</div>
-                <div className="col-md-2">price</div>
+                <div className="col-md-6">
+                  <b>name</b>
+                </div>
+                <div className="col-md-2">
+                  <b>qty</b>
+                </div>
+                <div className="col-md-2">
+                  <b>price</b>
+                </div>
               </div>
               {order.items.map((item, index) => (
                 <div className="row" key={index}>
-                  <div
-                    className="col-md-2"
-                    style={divStyle(item.donut.imageUrl)}
-                  />
-
+                  <div className="col-md-2" />
                   <div className="col-md-6">{item.donut.name}</div>
                   <div className="col-md-2">{item.qty}</div>
                   <div className="col-md-2">{item.donut.price}</div>
@@ -64,9 +58,11 @@ const OrderConfirmation = () => {
                 <div className="col-md-2">total</div>
                 <div className="col-md-2">
                   $
-                  {order.items.reduce((acc, item) => {
-                    return acc + item.donut.price * item.qty;
-                  }, 0)}
+                  {order.items
+                    .reduce((acc, item) => {
+                      return acc + item.donut.price * item.qty;
+                    }, 0)
+                    .toFixed(2)}
                 </div>
               </div>
             </div>

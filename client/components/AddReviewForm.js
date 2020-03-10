@@ -5,9 +5,7 @@ import { useForm } from 'react-hook-form';
 
 const AddReviewForm = () => {
   const dispatch = useDispatch();
-  const { register, handleSubmit, errors } = useForm();
-  // console.log('AddReviewForm errors: ', errors);
-
+  const { register, handleSubmit, reset } = useForm();
   const { donut, user } = useSelector(state => {
     return {
       user: state.user,
@@ -19,7 +17,12 @@ const AddReviewForm = () => {
     data.userId = user.id;
     data.donutId = donut.id;
     if (typeof data.rating === 'string') data.rating = parseInt(data.rating);
-    dispatch(addNewReview(data));
+    if (!user.id && !user.email) {
+      alert('Please log in to add a review!');
+    } else {
+      dispatch(addNewReview(data));
+      reset();
+    }
   };
 
   return (
@@ -28,11 +31,11 @@ const AddReviewForm = () => {
         <label className="text-muted">
           Your rating &nbsp;
           <select name="rating" ref={register({ required: true })}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
             <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="3">2</option>
+            <option value="1">1</option>
           </select>
         </label>
         <textarea
@@ -43,9 +46,11 @@ const AddReviewForm = () => {
           style={{ height: '75px', width: '100%' }}
           ref={register({ required: true, maxLength: 250 })}
         />
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
+        <div>
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );
