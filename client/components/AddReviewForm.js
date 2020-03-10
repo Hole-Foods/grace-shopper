@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form';
 const AddReviewForm = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit, reset } = useForm();
-
   const { donut, user } = useSelector(state => {
     return {
       user: state.user,

@@ -1,23 +1,8 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux'; // import redux hooks
-import { fetchDonuts } from '../store/donuts';
+import React from 'react';
 import styled from 'styled-components';
 
 const SingleOrder = props => {
   const { orders } = props;
-
-  // const dispatch = useDispatch();
-
-  // const { donuts } = useSelector(state => {
-  //   return {
-  //     donuts: state.donuts,
-  //   };
-  // });
-
-  // useEffect(() => {
-  //   dispatch(fetchDonuts());
-  // }, []);
-  console.log('ORDERS: ', orders);
 
   return (
     <div className="row">
@@ -31,7 +16,6 @@ const SingleOrder = props => {
                 </p>
                 <div className="card-text">
                   {order.orderItems.map(item => {
-                    console.log('ITEM: ', item);
                     return (
                       <ul key={item.id}>
                         <li>Donut: {item.donut.name}</li>
