@@ -37,7 +37,7 @@ const UserHome = () => {
       ) : (
         <h4>No Orders</h4>
       )}
-      <UserUpdateForm />
+      {userInfo.address ? <UserUpdateForm address={userInfo.address} /> : null}
     </div>
   );
 };
