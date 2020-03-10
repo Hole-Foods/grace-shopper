@@ -1,17 +1,27 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSingleDonut, editSingleDonut } from '../store/donut';
+import {
+  fetchSingleDonut,
+  editSingleDonut,
+  fetchDonutReviews,
+} from '../store/donut';
 import { addItemToCart } from '../store/cart';
 import ReviewList from './ReviewList';
+import AddReviewForm from './AddReviewForm';
 import FadeIn from 'react-fade-in';
 
 const SingleDonut = props => {
   // declare dispatch function - always when you need dispatch
+
   const dispatch = useDispatch();
 
   // just like map state to props but assigning to a const variable
-  const { donut, user } = useSelector(state => {
-    return { donut: state.singleDonut, user: state.user };
+  const { donut, user, reviews } = useSelector(state => {
+    return {
+      donut: state.singleDonut,
+      user: state.user,
+      reviews: state.reviews,
+    };
   });
 
   // just like component did mount
@@ -38,14 +48,10 @@ const SingleDonut = props => {
     return <div>4🍩4 no donut found</div>;
   }
 
-  // NULL REF ERROR
-  console.log('donut reviews: ', donut.reviews && donut.reviews.length);
-
   return (
     <>
-      {/* <DefaultDiv> */}
       <div className="container">
-        <div className="card mb-3">
+        <div className="card mb-3 my-3">
           <div className="row no-gutters">
             <div className="col-md-3">
               <FadeIn transitionDuration="1000">
@@ -96,13 +102,15 @@ const SingleDonut = props => {
         </div>
 
         <h2 className="text-primary">
+          Reviews &nbsp;
           <span className="badge badge-light">
-            {donut.reviews && donut.reviews.length ? donut.reviews.length : '0'}{' '}
+            {reviews && reviews.length ? reviews.length : '0'}
           </span>
-          Reviews
         </h2>
-        <ReviewList reviews={donut.reviews} />
-        {/* </DefaultDiv> */}
+        {donut.reviews && donut.id && <ReviewList donutId={donut.id} />}
+      </div>
+      <div className="container">
+        <AddReviewForm />
       </div>
     </>
   );

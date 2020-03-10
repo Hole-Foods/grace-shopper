@@ -45,7 +45,11 @@ const CartItem = props => {
           </div>
           <div className="col">${item.donut.price}</div>
           <div className="col">
-            <button className="btn" onClick={subtractFromCart}>
+            <button
+              className="btn"
+              disabled={item.qty <= 0}
+              onClick={subtractFromCart}
+            >
               -
             </button>
             {item.qty}

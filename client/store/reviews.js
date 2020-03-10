@@ -20,10 +20,10 @@ const addReview = review => {
 };
 
 // thunk-creators
-export const fetchReviews = () => {
+export const fetchDonutReviews = donutId => {
   return async dispatch => {
     try {
-      const { data } = await axios.get('/api/reviews');
+      const { data } = await axios.get(`/api/reviews/donuts/${donutId}`);
       dispatch(setReviews(data));
     } catch (err) {
       console.log('fetchReviews error', err);
@@ -31,15 +31,14 @@ export const fetchReviews = () => {
   };
 };
 
-export const addNewReview = review => {
-  return async dispatch => {
-    try {
-      const { data } = await axios.post('/api/reviews');
-      dispatch(addReview(data));
-    } catch (err) {
-      console.log('addNewReview err', err);
-    }
-  };
+export const addNewReview = review => async dispatch => {
+  try {
+    const { data } = await axios.post('/api/reviews', review);
+    console.log('DATA!', data);
+    dispatch(addReview(data));
+  } catch (err) {
+    console.log('addNewReview err', err);
+  }
 };
 
 //reducers

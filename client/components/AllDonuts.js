@@ -3,20 +3,16 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'; // import redux hooks
 import { fetchDonuts, deleteDonut } from '../store/donuts';
 import { addItemToCart } from '../store/cart';
-import Pagination from './Pagination';
 import styled from 'styled-components';
 import FadeIn from 'react-fade-in';
 
 const AllDonuts = () => {
-  // declare dispatch function - always when you need dispatch
   const dispatch = useDispatch();
 
-  // just like map state to props but assigning to a const variable
   const { donuts, user } = useSelector(state => {
     return { donuts: state.donuts, user: state.user };
   });
 
-  // just like component did mount
   useEffect(() => {
     dispatch(fetchDonuts());
   }, []);
@@ -28,10 +24,6 @@ const AllDonuts = () => {
   const removeDonut = donutId => {
     dispatch(deleteDonut(donutId));
   };
-
-  console.log('DONUTS: ', donuts);
-
-  //GET CURRENT POSTS
 
   return (
     <div className="container">
@@ -48,7 +40,7 @@ const AllDonuts = () => {
         {donuts.map(donut => (
           <DefaultDiv key={donut.id}>
             <div className="col-md">
-              <div className="card">
+              <div className="card mx-3 my-3">
                 <Link to={`/donuts/${donut.id}`}>
                   <FadeIn transitionDuration="1000">
                     <img
@@ -61,7 +53,7 @@ const AllDonuts = () => {
                   <Link to={`/donuts/${donut.id}`}>
                     <h5 className="card-title">{donut.name}</h5>
                   </Link>
-                  <p className="card-text">${donut.price}</p>
+                  <p className="card-text text-muted">${donut.price}</p>
                   <button
                     type="submit"
                     className="btn btn-primary"
@@ -83,7 +75,6 @@ const AllDonuts = () => {
           </DefaultDiv>
         ))}
       </div>
-      <Pagination />
     </div>
   );
 };
