@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSingleDonut } from '../store/donut';
+import { fetchSingleDonut, editSingleDonut } from '../store/donut';
 import { addItemToCart } from '../store/cart';
 import ReviewList from './ReviewList';
 import FadeIn from 'react-fade-in';
@@ -10,7 +10,9 @@ const SingleDonut = props => {
   const dispatch = useDispatch();
 
   // just like map state to props but assigning to a const variable
-  const donut = useSelector(state => state.singleDonut);
+  const { donut, user } = useSelector(state => {
+    return { donut: state.singleDonut, user: state.user };
+  });
 
   // just like component did mount
   useEffect(() => {
@@ -23,6 +25,13 @@ const SingleDonut = props => {
     if (qty > 0 && qty <= donut.qty) {
       dispatch(addItemToCart({ donutId: donut.id, qty }));
     }
+  };
+
+  const editDescription = evt => {
+    evt.preventDefault();
+    dispatch(
+      editSingleDonut(donut.id, { description: evt.target.description.value })
+    );
   };
 
   if (!donut) {
@@ -62,6 +71,17 @@ const SingleDonut = props => {
                   </small>
                 </p>
                 <p className="card-text">{donut.description}</p>
+                {user.isAdmin && (
+                  <form id="edit-desc" onSubmit={editDescription}>
+                    <textarea
+                      name="description"
+                      placeholder="edit description"
+                    />
+                    <button type="submit" className="btn btn-primary">
+                      Save Edits
+                    </button>
+                  </form>
+                )}
                 <form id="add-to-cart" value="1" onSubmit={addToCart}>
                   <input name="qty" type="number" min="1" max={donut.qty} />
                   <div>

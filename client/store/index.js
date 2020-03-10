@@ -7,8 +7,16 @@ import donuts from './donuts';
 import cart from './cart';
 import order from './order';
 import singleDonut from './donut';
+import users from './users';
 
-const reducer = combineReducers({ user, donuts, singleDonut, cart, order });
+const reducer = combineReducers({
+  user,
+  donuts,
+  singleDonut,
+  cart,
+  order,
+  users,
+});
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );

@@ -17,3 +17,4 @@ export { default as OrderConfirmation } from './OrderConfirmation';
 
 //admin only pages
 export { default as AddDonutForm } from './AddDonutForm';
+export { default as AllUsers } from './AllUsers';
