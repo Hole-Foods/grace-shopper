@@ -4,7 +4,6 @@ import { fetchUserInfo } from '../store/userInfo';
 import SingleReview from './SingleReview';
 import OrderList from './OrderList';
 import UserUpdateForm from './UserUpdateForm';
-import { Accordion, Card, Button } from 'react-bootstrap';
 
 /**
  * COMPONENT
@@ -23,62 +22,6 @@ const UserHome = () => {
     dispatch(fetchUserInfo(user.id));
   }, []);
 
-  //   return (
-  //     <div>
-  //       <h3>Welcome, {user.email}</h3>
-  //       <Accordion>
-  //         <Card>
-  //           <Card.Header>
-  //             <Accordion.Toggle as={Button} variant="link" eventKey="0">
-  //               See Your Reviews
-  //             </Accordion.Toggle>
-  //           </Card.Header>
-  //           <Accordion.Collapse eventKey="0">
-  //             <Card.Body>
-  //               {userInfo.reviews ? (
-  //                 <div>
-  //                   {userInfo.reviews.map(review => (
-  //                     <SingleReview key={review.id} review={review} />
-  //                   ))}
-  //                 </div>
-  //               ) : (
-  //                 <p>No reviews.</p>
-  //               )}
-  //             </Card.Body>
-  //           </Accordion.Collapse>
-  //           <Card.Header>
-  //             <Accordion.Toggle as={Button} variant="link" eventKey="1">
-  //               See Your Orders
-  //             </Accordion.Toggle>
-  //           </Card.Header>
-  //           <Accordion.Collapse eventKey="1">
-  //             <Card.Body>
-  //               {userInfo.orders ? (
-  //                 <OrderList orders={userInfo.orders} />
-  //               ) : (
-  //                 <h4>No Orders</h4>
-  //               )}
-  //             </Card.Body>
-  //           </Accordion.Collapse>
-  //           <Card.Header>
-  //             <Accordion.Toggle as={Button} variant="link" eventKey="2">
-  //               Edit Shipping Information
-  //             </Accordion.Toggle>
-  //           </Card.Header>
-  //           <Accordion.Collapse eventKey="2">
-  //             <Card.Body>
-  //               {userInfo.address ? (
-  //                 <UserUpdateForm address={userInfo.address} />
-  //               ) : null}
-  //             </Card.Body>
-  //           </Accordion.Collapse>
-  //         </Card>
-  //       </Accordion>
-  //     </div>
-  //   );
-  // };
-
-  //WITHOUT REACT-BOOTSTRAP-- NON-FUNCTIONAL
   return (
     <div>
       <h3>Welcome, {user.email}</h3>
