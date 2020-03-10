@@ -81,7 +81,7 @@ const SingleDonut = props => {
             {donut.reviews && donut.reviews.length ? donut.reviews.length : '0'}{' '}
           </span>
         </h2>
-        <ReviewList reviews={donut.reviews} />
+        <ReviewList donutId={donut.id} />
       </div>
       <div className="container">
         <AddReviewForm />

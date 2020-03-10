@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const { User, Donut, Review } = require('../db/models');
+const { isLoggedIn } = require('../utils');
 module.exports = router;
 
+// all reviews
 router.get('/', async (req, res, next) => {
   try {
-    const reviews = await Review.findAll({
-      where: { userId: req.user.id },
-    });
+    const reviews = await Review.findAll();
     res.json(reviews);
   } catch (err) {
     next(err);
@@ -25,7 +25,19 @@ router.get('/donuts/:donutId', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+// all reviews for specific user
+router.get('/users/:userId', async (req, res, next) => {
+  try {
+    const review = await Review.findAll({
+      where: { userId: req.params.userId },
+    });
+    res.json(review);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/', isLoggedIn, async (req, res, next) => {
   try {
     if (req.user) {
       const review = await Review.create(req.body);
@@ -37,9 +49,3 @@ router.post('/', async (req, res, next) => {
     next(err);
   }
 });
-
-// router.post('/', (req, res, next) => {
-//   Review.create(req.body)
-//     .then(review => res.json(review))
-//     .catch(next);
-// });

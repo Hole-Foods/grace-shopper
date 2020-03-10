@@ -23,10 +23,6 @@ const AllDonuts = () => {
     dispatch(addItemToCart({ donutId, qty: 1 }));
   };
 
-  console.log('DONUTS: ', donuts);
-
-  //GET CURRENT POSTS
-
   return (
     <div className="container">
       <div className="row">
