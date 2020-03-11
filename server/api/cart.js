@@ -52,6 +52,7 @@ router.put('/', async (req, res, next) => {
           if (cart[i].qty > cart[i].donut.qty) {
             cart[i].qty = cart[i].donut.qty;
           }
+          if (cart[i].qty <= 0) cart[i].qty = 0;
           update = true;
         }
       }

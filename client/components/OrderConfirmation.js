@@ -1,9 +1,15 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import FadeIn from 'react-fade-in';
+import { clearCart } from '../store/cart';
 
 const OrderConfirmation = () => {
+  const dispatch = useDispatch();
   const { order } = useSelector(state => state.order);
+
+  useEffect(() => {
+    dispatch(clearCart());
+  }, []);
 
   return (
     <>
@@ -52,7 +58,7 @@ const OrderConfirmation = () => {
                   <div className="col-md-2" />
                   <div className="col-md-6">{item.donut.name}</div>
                   <div className="col-md-2">{item.qty}</div>
-                  <div className="col-md-2">{item.donut.price}</div>
+                  <div className="col-md-2">${item.donut.price}</div>
                 </div>
               ))}
               <div className="row">
