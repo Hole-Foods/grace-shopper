@@ -28,6 +28,7 @@ const SingleReview = props => {
 export default SingleReview;
 
 const DefaultDiv = styled.div`
+  width: 100%;
   color: #000000;
   padding: 4px;
 `;
