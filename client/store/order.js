@@ -46,6 +46,8 @@ export default (state = {}, action) => {
         order: {
           ...action.order.address,
           id: action.order.order.id,
+          receiptUrl: action.order.order.receiptUrl,
+          chargeId: action.order.order.chargeId,
           items: action.order.items,
         },
       };
