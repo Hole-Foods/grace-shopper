@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <div className="footer absolute-bottom">
+    <div className="footer fixed-bottom">
       <center>
         <small className="text-muted">© 2020 Hole Foods Donuts</small>
       </center>

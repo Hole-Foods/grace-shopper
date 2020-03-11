@@ -118,6 +118,12 @@ const SingleDonut = props => {
             <button className="btn btn-primary">Log in to add review</button>
           </Link>
         )}
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </div>
     </>
   );
