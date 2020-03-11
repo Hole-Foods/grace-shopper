@@ -38,10 +38,12 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
             All Donuts
           </Link>
           <Link to="/cart" className='"nav-item"'>
-            Cart - &nbsp;
-            {cart.reduce((acc, item) => {
-              return acc + item.qty;
-            }, 0)}
+            Cart&nbsp;
+            <span className="badge badge-primary">
+              {cart.reduce((acc, item) => {
+                return acc + item.qty;
+              }, 0)}
+            </span>
           </Link>
         </>
         {isAdmin && (

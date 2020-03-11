@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   fetchSingleDonut,
   editSingleDonut,
@@ -110,7 +111,19 @@ const SingleDonut = props => {
         {donut.reviews && donut.id && <ReviewList donutId={donut.id} />}
       </div>
       <div className="container">
-        <AddReviewForm />
+        {user.email && user.id ? (
+          <AddReviewForm />
+        ) : (
+          <Link to="/login">
+            <button className="btn btn-primary">Log in to add review</button>
+          </Link>
+        )}
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </div>
     </>
   );
