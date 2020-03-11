@@ -19,7 +19,7 @@ const AllUsers = () => {
   }
 
   return (
-    <div>
+    <div className="container">
       <h1>Admin Dash</h1>
       {users.length ? (
         users.map(user => <ListedUser key={user.id} user={user} />)

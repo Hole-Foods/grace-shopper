@@ -17,12 +17,8 @@ const AddReviewForm = () => {
     data.userId = user.id;
     data.donutId = donut.id;
     if (typeof data.rating === 'string') data.rating = parseInt(data.rating);
-    if (!user.id && !user.email) {
-      alert('Please log in to add a review!');
-    } else {
-      dispatch(addNewReview(data));
-      reset();
-    }
+    dispatch(addNewReview(data));
+    reset();
   };
 
   return (
