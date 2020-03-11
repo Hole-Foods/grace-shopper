@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const GET_CART = 'GET_CART';
 const ADD_TO_CART = 'ADD_TO_CART';
+const CLEAR_CART = 'CLEAR_CART';
 
 const getCart = cart => ({
   type: GET_CART,
@@ -10,6 +11,9 @@ const getCart = cart => ({
 const addToCart = cartItem => ({
   type: ADD_TO_CART,
   cartItem,
+});
+export const clearCart = () => ({
+  type: CLEAR_CART,
 });
 
 export const fetchCart = () => async dispatch => {
@@ -45,6 +49,8 @@ export default function(state = initCart, action) {
   switch (action.type) {
     case GET_CART:
       return action.cart;
+    case CLEAR_CART:
+      return initCart;
     case ADD_TO_CART:
       let cart = [...state];
       let inCart = false;

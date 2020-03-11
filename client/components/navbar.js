@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
-import { fetchCart } from '../store/cart';
+import { clearCart } from '../store/cart';
 import styled from 'styled-components';
 
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
@@ -74,7 +74,7 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout());
-      dispatch(fetchCart());
+      dispatch(clearCart());
     },
   };
 };
