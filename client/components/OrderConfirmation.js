@@ -26,6 +26,9 @@ const OrderConfirmation = () => {
                   <div className="row">{`${order.address2}`}</div>
                 ) : null}
                 <div className="row">{`${order.city}, ${order.state} ${order.zip}`}</div>
+                <div className="row">
+                  <a href={`${order.receiptUrl}`}>{`${order.chargeId}`}</a>
+                </div>
               </div>
             </div>
             <div className="col-md-6">

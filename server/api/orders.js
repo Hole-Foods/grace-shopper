@@ -9,8 +9,7 @@ const {
   CartItem,
 } = require('../db/models');
 const { isLoggedIn } = require('../utils');
-const STRIPE_KEY = process.env.STRIPE_KEY;
-const stripe = require('stripe')(STRIPE_KEY);
+const stripe = require('stripe')(process.env.STRIPE_KEY);
 module.exports = router;
 
 const adjustStock = async (id, qty) => {
@@ -54,18 +53,18 @@ router.put('/', isLoggedIn, async (req, res, next) => {
         ],
       });
 
-      if (req.body.token) {
-        const total = cartItems.reduce((acc, item) => {
-          return acc + item.donut.price * item.qty * 100;
-        }, 0);
+      const total = cartItems.reduce((acc, item) => {
+        return acc + item.donut.price * item.qty * 100;
+      }, 0);
 
-        const charge = await stripe.charges.create({
-          amount: total,
-          currency: 'usd',
-          description: 'Hole Foods',
-          source: req.body.token.id,
-        });
-      }
+      const charge = await stripe.charges.create({
+        amount: total,
+        currency: 'usd',
+        description: 'Hole Foods',
+        source: req.body.token.id,
+      });
+
+      console.log('CHARGE', charge);
 
       const order = await Order.create();
       await order.setUser(user);
@@ -84,6 +83,10 @@ router.put('/', isLoggedIn, async (req, res, next) => {
       );
 
       await order.setOrderItems(orderItems); // take in an array of order items
+
+      order.receiptUrl = charge.receipt_url;
+      order.chargeId = charge.id;
+      await order.save();
 
       await CartItem.destroy({ where: { userId: user.id } }); // finally destroy cart items
 
