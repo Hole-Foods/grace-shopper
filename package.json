@@ -43,7 +43,7 @@
   "dependencies": {
     "@stripe/react-stripe-js": "^1.0.3",
     "@stripe/stripe-js": "^1.0.2",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "chance": "^1.1.4",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^6.0.0",
